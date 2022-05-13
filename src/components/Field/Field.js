@@ -1,14 +1,36 @@
-import { FieldGame, Point } from "./Field.styles";
+import BluePoint from "../BluePoint";
+import { FieldGame, PinkPoint } from "./Field.styles";
 
-const Field = ({ points, onClick }) => {
+const Field = ({
+  pinkPoints,
+  bluePoints,
+  deleteOnClickPinkPoint,
+  deleteOnClickBluePoint,
+  addsPoint,
+}) => {
+  const handleClick = (id) => {
+    deleteOnClickPinkPoint(id);
+    addsPoint();
+  };
   return (
     <FieldGame>
-      {points.map((point) => (
-        <Point
-          key={point.id}
-          x={point.x}
-          y={point.y}
-          onClick={() => onClick(point.id)}
+      {pinkPoints?.map(({ id, x, y, size }) => (
+        <PinkPoint
+          key={id}
+          x={x}
+          y={y}
+          size={size}
+          onClick={() => handleClick(id)}
+        />
+      ))}
+      {bluePoints?.map(({ id, x, y }) => (
+        <BluePoint
+          key={id}
+          addsPoint={addsPoint}
+          deleteOnClickBluePoint={deleteOnClickBluePoint}
+          id={id}
+          x={x}
+          y={y}
         />
       ))}
     </FieldGame>

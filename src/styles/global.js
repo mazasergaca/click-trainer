@@ -12,6 +12,7 @@ export const GLobalStyles = createGlobalStyle`
   body {
     font-size: 12px;
     line-height: 1.33;
+    font-family: 'Press Start 2P', cursive;
    background-color: #000;
     color: #fff;
   

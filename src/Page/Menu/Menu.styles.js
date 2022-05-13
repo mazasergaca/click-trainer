@@ -14,5 +14,20 @@ export const WrapperNav = styled.div`
 `;
 
 export const ButtonMenu = styled.button`
-  font-size: 32px;
+  padding: 13px 35px;
+
+  font-family: "Press Start 2P", cursive;
+  font-size: 20px;
+
+  border-radius: 20px;
+  border: 1px solid #fff;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+
+  transition: border-color 0.25s;
+
+  &:hover {
+    border-color: rgb(234, 72, 132);
+  }
 `;

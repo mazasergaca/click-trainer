@@ -1,20 +1,13 @@
 import styled, { keyframes } from "styled-components";
 
-export const FieldGame = styled.div`
-  height: 85vh;
-  position: relative;
-
-  background-color: #222;
-`;
-
 const AnimationPoint = keyframes`
-0%{filter: drop-shadow(rgb(234, 72, 132) 0px 0px 2px)
-    drop-shadow(rgb(234, 72, 132) 0px 0px 10px);}
-100%{filter: drop-shadow(rgb(234, 72, 132) 0px 0px 10px)
-    drop-shadow(rgb(234, 72, 132) 0px 0px 30px);}
+0%{filter: drop-shadow(rgb(14, 180, 201) 0px 0px 10px)
+    drop-shadow(rgb(14, 180, 201) 0px 0px 10px);}
+100%{filter: drop-shadow(rgb(14, 180, 201) 0px 0px 10px)
+    drop-shadow(rgb(14, 180, 201) 0px 0px 30px);}
 `;
 
-export const PinkPoint = styled.div.attrs((props) => ({
+export const Point = styled.div.attrs((props) => ({
   style: {
     width: props.size + "px",
     height: props.size + "px",
@@ -22,9 +15,12 @@ export const PinkPoint = styled.div.attrs((props) => ({
     left: props.x + "px",
   },
 }))`
+  top: 0;
+  left: 0;
   position: absolute;
   border-radius: 50%;
-  background-color: rgb(234, 72, 132);
+  background-color: rgb(14, 180, 201);
+  transition: width 0.25s, height 0.25s;
 
   animation-name: ${AnimationPoint};
   animation-duration: 700ms;
