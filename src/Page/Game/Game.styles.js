@@ -5,12 +5,25 @@ export const Container = styled.div`
 `;
 
 export const WrapperInfo = styled.div`
+  position: relative;
   padding: 10px 15px;
   display: flex;
   justify-content: space-between;
 `;
 
+export const WrapperItem = styled.div`
+  width: 500px;
+  display: flex;
+  justify-content: space-between;
+`;
+
 export const Item = styled.span`
+  font-size: 24px;
+`;
+export const Time = styled.span`
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   font-size: 24px;
 `;
 
@@ -33,8 +46,7 @@ export const MenuNav = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  background-color: #444;
+\
 `;
 
 export const ItemMenu = styled.span`

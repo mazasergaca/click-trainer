@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import useSound from "use-sound";
 
+import coin from "../../assets/images/coin.svg";
 import endSound from "../../assets/sounds/end.mp3";
 import startSound from "../../assets/sounds/start.mp3";
 import Field from "../../components/Field/Field";
@@ -9,6 +10,8 @@ import {
   Container,
   WrapperInfo,
   Item,
+  Time,
+  WrapperItem,
   MenuNav,
   Backdrop,
   ItemMenu,
@@ -18,6 +21,9 @@ import {
 const Game = () => {
   const [bestResult, setBestResult] = useState(
     JSON.parse(window.localStorage.getItem("best result")) || 0
+  );
+  const [coins, setCoins] = useState(
+    JSON.parse(window.localStorage.getItem("coins")) || 0
   );
   const [score, setScore] = useState(0);
   const [time, setTime] = useState(10);
@@ -31,6 +37,8 @@ const Game = () => {
 
   useEffect(() => {
     if (time === 0) {
+      setCoins((prev) => prev + score);
+      window.localStorage.setItem("coins", JSON.stringify(coins + score));
       clearInterval(timerIntervalId.current);
       if (bestResult < score) {
         window.localStorage.setItem("best result", JSON.stringify(score));
@@ -39,7 +47,7 @@ const Game = () => {
       setIsNewGame(false);
       playEndSound();
     } // eslint-disable-next-line
-  }, [time, bestResult]);
+  }, [time]);
 
   const timer = () => {
     timerIntervalId.current = setInterval(() => {
@@ -76,8 +84,20 @@ const Game = () => {
         <Container>
           <WrapperInfo>
             <Item>My record {bestResult}</Item>
-            <Item>{time}</Item>
-            <Item>Score: {score}</Item>
+            <Time>{time}</Time>
+            <WrapperItem>
+              <Item
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                Coins:{coins}
+                <img src={coin} alt="coin" width="30px" />
+              </Item>
+              <Item>Score:{score}</Item>
+            </WrapperItem>
           </WrapperInfo>
           <Field
             time={time}
