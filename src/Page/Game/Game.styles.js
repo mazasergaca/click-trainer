@@ -23,7 +23,7 @@ export const Backdrop = styled.div`
   display: ${(props) => (props.isNewGame ? "none" : "block")};
 `;
 
-export const Menu = styled.div`
+export const MenuNav = styled.div`
   padding: 10px 10px;
   width: 500px;
   position: absolute;
