@@ -9,11 +9,24 @@ export const FieldGame = styled.div`
 export const WrapperFieldGame = styled.div`
   height: calc(100vh - 52px);
   display: flex;
+  flex-direction: column;
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+  }
 `;
 
 export const WrapperSkills = styled.div`
-  width: 200px;
-  padding: 30px 0;
+  display: flex;
+
+  margin: 0 auto;
+  padding: 15px 0;
+
+  @media screen and (min-width: 768px) {
+    width: 200px;
+    padding: 30px 0;
+    flex-direction: column;
+  }
 `;
 
 export const ItemSkills = styled.div`
@@ -21,7 +34,14 @@ export const ItemSkills = styled.div`
   align-items: center;
 
   &:not(:last-child) {
-    margin-bottom: 30px;
+    margin-right: 30px;
+  }
+
+  @media screen and (min-width: 768px) {
+    &:not(:last-child) {
+      margin-bottom: 30px;
+    }
+    margin-left: 10px;
   }
 `;
 
@@ -33,7 +53,6 @@ export const SkillsText = styled.span`
 export const ButtonSkills = styled.button`
   width: 50px;
   height: 50px;
-  margin-left: 10px;
   padding: 15px;
   display: flex;
   align-items: center;
@@ -46,5 +65,8 @@ export const ButtonSkills = styled.button`
 
   &:hover {
     border-color: ${(props) => props.color};
+  }
+
+  @media screen and (min-width: 768px) {
   }
 `;

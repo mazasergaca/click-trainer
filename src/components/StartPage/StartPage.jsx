@@ -1,6 +1,6 @@
-import { Backdrop, WrapperNav, ButtonMenu } from "./Menu.styles";
+import { Backdrop, WrapperNav, ButtonMenu } from "./StartPage.styles";
 
-const GameMenu = ({ startGame }) => {
+const StartPage = ({ startGame }) => {
   return (
     <Backdrop>
       <WrapperNav>
@@ -10,4 +10,4 @@ const GameMenu = ({ startGame }) => {
   );
 };
 
-export default GameMenu;
+export default StartPage;
