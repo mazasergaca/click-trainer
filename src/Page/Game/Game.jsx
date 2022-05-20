@@ -1,7 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import useSound from "use-sound";
 
-import buySound from "../../assets/sounds/buy.mp3";
+import { changeBestResult, incrementCoins } from "../../redux/info/info-slice";
+import infoSelectors from "../../redux/info/info-selects";
 import endSound from "../../assets/sounds/end.mp3";
 import startSound from "../../assets/sounds/start.mp3";
 import Field from "../../components/Field/Field";
@@ -11,32 +13,15 @@ import Menu from "../../components/Menu";
 import { Container } from "./Game.styles";
 
 const Game = () => {
-  const [bestResult, setBestResult] = useState(
-    JSON.parse(window.localStorage.getItem("best result")) || 0
-  );
-  const [coins, setCoins] = useState(
-    JSON.parse(window.localStorage.getItem("coins")) || 0
-  );
   const [score, setScore] = useState(0);
   const [time, setTime] = useState(10);
   const [isStart, setIsStart] = useState(false);
   const [isNewGame, setIsNewGame] = useState(false);
   const [pathMenu, setPathMenu] = useState("menu");
-  const [store, setStore] = useState(
-    JSON.parse(window.localStorage.getItem("store")) || {
-      pinkstorm: 0,
-      bluestorm: 0,
-      yellowstorm: 0,
-    }
-  );
 
-  const [priceStore, setPriceStore] = useState({
-    pricePinkstorm: 20,
-    priceBluestorm: 35,
-    priceYellowstorm: 45,
-  });
+  const dispatch = useDispatch();
+  const bestResult = useSelector(infoSelectors.getBestResult);
 
-  const [playBuySound] = useSound(buySound, { volume: 0.4 });
   const [playStartSound] = useSound(startSound, { volume: 0.4 });
   const [playEndSound] = useSound(endSound, { volume: 0.4 });
 
@@ -44,22 +29,15 @@ const Game = () => {
 
   useEffect(() => {
     if (time === 0) {
-      setCoins((prev) => prev + score);
-      window.localStorage.setItem("coins", JSON.stringify(coins + score));
+      dispatch(incrementCoins(score));
       clearInterval(timerIntervalId.current);
       if (bestResult < score) {
-        window.localStorage.setItem("best result", JSON.stringify(score));
-        setBestResult(score);
+        dispatch(changeBestResult(score));
       }
       setIsNewGame(false);
       playEndSound();
     } // eslint-disable-next-line
   }, [time]);
-
-  useEffect(() => {
-    window.localStorage.setItem("store", JSON.stringify(store));
-    window.localStorage.setItem("coins", JSON.stringify(coins));
-  }, [store, coins]);
 
   const timer = () => {
     timerIntervalId.current = setInterval(() => {
@@ -95,59 +73,16 @@ const Game = () => {
     setPathMenu(name);
   };
 
-  const handleBuyPinkStorm = () => {
-    if (coins >= priceStore.pricePinkstorm) {
-      playBuySound();
-      setCoins((prev) => prev - priceStore.pricePinkstorm);
-      setStore(({ bluestorm, yellowstorm, pinkstorm }) => ({
-        bluestorm,
-        yellowstorm,
-        pinkstorm: pinkstorm + 1,
-      }));
-    }
-  };
-
-  const handleBuyBlueStorm = () => {
-    if (coins >= priceStore.priceBluestorm) {
-      playBuySound();
-      setCoins((prev) => prev - priceStore.priceBluestorm);
-      setStore(({ bluestorm, yellowstorm, pinkstorm }) => ({
-        bluestorm: bluestorm + 1,
-        yellowstorm,
-        pinkstorm,
-      }));
-    }
-  };
-
-  const handleBuyYellowStorm = () => {
-    if (coins >= priceStore.priceYellowstorm) {
-      playBuySound();
-      setCoins((prev) => prev - priceStore.priceYellowstorm);
-      setStore(({ bluestorm, yellowstorm, pinkstorm }) => ({
-        bluestorm,
-        yellowstorm: yellowstorm + 1,
-        pinkstorm,
-      }));
-    }
-  };
-
   return (
     <>
       {isStart ? (
         <Container>
-          <Header
-            bestResult={bestResult}
-            time={time}
-            score={score}
-            coins={coins}
-          />
+          <Header time={time} score={score} />
           <Field
             time={time}
             addsPoint={addsPoint}
             isNewGame={isNewGame}
             addsTime={addsTime}
-            store={store}
-            setStore={setStore}
           />
           {!isNewGame && (
             <Menu
@@ -155,12 +90,6 @@ const Game = () => {
               changePathMenu={changePathMenu}
               score={score}
               startNewGame={startNewGame}
-              priceStore={priceStore}
-              coins={coins}
-              handleBuyPinkStorm={handleBuyPinkStorm}
-              handleBuyBlueStorm={handleBuyBlueStorm}
-              handleBuyYellowStorm={handleBuyYellowStorm}
-              store={store}
             />
           )}
         </Container>

@@ -1,4 +1,15 @@
+import { useSelector, useDispatch } from "react-redux";
+import useSound from "use-sound";
+import infoSelectors from "../../../redux/info/info-selects";
+import { decrementCoins } from "../../../redux/info/info-slice";
+import shopSelectors from "../../../redux/shop/shop-selectors";
+import {
+  addPinkstorm,
+  addBluestorm,
+  addYellowstorm,
+} from "../../../redux/shop/shop-slice";
 import sprite from "../../../assets/images/sprite.svg";
+import buySound from "../../../assets/sounds/buy.mp3";
 import coin from "../../../assets/images/coin.svg";
 import {
   ButtonMenu,
@@ -11,15 +22,37 @@ import {
   WrapperPrice,
 } from "../Menu.styles";
 
-const StoreMenu = ({
-  changePathMenu,
-  priceStore,
-  coins,
-  store,
-  handleBuyPinkStorm,
-  handleBuyBlueStorm,
-  handleBuyYellowStorm,
-}) => {
+const StoreMenu = ({ changePathMenu }) => {
+  const [playBuySound] = useSound(buySound, { volume: 0.4 });
+
+  const shop = useSelector(shopSelectors.getShop);
+  const coins = useSelector(infoSelectors.getCoins);
+
+  const dispatch = useDispatch();
+
+  const handleBuyPinkStorm = () => {
+    if (coins >= shop.pinkstorm.price) {
+      playBuySound();
+      dispatch(decrementCoins(shop.pinkstorm.price));
+      dispatch(addPinkstorm());
+    }
+  };
+
+  const handleBuyBlueStorm = () => {
+    if (coins >= shop.bluestorm.price) {
+      playBuySound();
+      dispatch(decrementCoins(shop.bluestorm.price));
+      dispatch(addBluestorm());
+    }
+  };
+
+  const handleBuyYellowStorm = () => {
+    if (coins >= shop.yellowstorm.price) {
+      playBuySound();
+      dispatch(decrementCoins(shop.yellowstorm.price));
+      dispatch(addYellowstorm());
+    }
+  };
   return (
     <ContainerStore>
       <ButtonMenu onClick={() => changePathMenu("menu")}>back</ButtonMenu>
@@ -32,14 +65,14 @@ const StoreMenu = ({
         </WrapperStoreItem>
         <FlexWrapper>
           <WrapperPrice>
-            {priceStore.pricePinkstorm}
+            {shop.pinkstorm.price}
             <img src={coin} alt="coin" width="30px" />
           </WrapperPrice>
           <WrapperStoreItem>
-            <StoreText>{store.pinkstorm}</StoreText>
+            <StoreText>{shop.pinkstorm.amount}</StoreText>
             <ButtonStore
               type="button"
-              disabled={coins < priceStore.pricePinkstorm}
+              disabled={coins < shop.pinkstorm.price}
               onClick={handleBuyPinkStorm}
             >
               buy
@@ -56,14 +89,14 @@ const StoreMenu = ({
         </WrapperStoreItem>
         <FlexWrapper>
           <WrapperPrice>
-            {priceStore.priceBluestorm}
+            {shop.bluestorm.price}
             <img src={coin} alt="coin" width="30px" />
           </WrapperPrice>
           <WrapperStoreItem>
-            <StoreText>{store.bluestorm}</StoreText>
+            <StoreText>{shop.bluestorm.amount}</StoreText>
             <ButtonStore
               type="button"
-              disabled={coins < priceStore.priceBluestorm}
+              disabled={coins < shop.bluestorm.price}
               onClick={handleBuyBlueStorm}
             >
               buy
@@ -80,14 +113,14 @@ const StoreMenu = ({
         </WrapperStoreItem>
         <FlexWrapper>
           <WrapperPrice>
-            {priceStore.priceYellowstorm}
+            {shop.yellowstorm.price}
             <img src={coin} alt="coin" width="30px" />
           </WrapperPrice>
           <WrapperStoreItem>
-            <StoreText>{store.yellowstorm}</StoreText>
+            <StoreText>{shop.yellowstorm.amount}</StoreText>
             <ButtonStore
               type="button"
-              disabled={coins < priceStore.priceYellowstorm}
+              disabled={coins < shop.yellowstorm.price}
               onClick={handleBuyYellowStorm}
             >
               buy

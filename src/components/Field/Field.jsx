@@ -1,7 +1,24 @@
 import React, { useState, useRef, useEffect } from "react";
 import { nanoid } from "nanoid";
 import useSound from "use-sound";
+import { useSelector, useDispatch } from "react-redux";
 
+import {
+  deleteBluestorm,
+  deletePinkstorm,
+  deleteYellowstorm,
+} from "../../redux/shop/shop-slice";
+import shopSelectors from "../../redux/shop/shop-selectors";
+import pointsSelectors from "../../redux/points/points-selectors";
+import {
+  createPinkPoint,
+  deletePinkPoint,
+  createBluePoint,
+  deleteBluePoint,
+  createYellowPoint,
+  deleteYellowPoint,
+  clearAllPoints,
+} from "../../redux/points/points-slice";
 import { deletePointLaterSomeTime } from "../../utils/deletePointLaterSomeTime";
 import { createPoint } from "../../utils/createPoint";
 import skillSound from "../../assets/sounds/skill.mp3";
@@ -19,14 +36,18 @@ import {
   SkillsText,
 } from "./Field.styles";
 
-const Field = ({ addsPoint, addsTime, isNewGame, time, store, setStore }) => {
+const Field = ({ addsPoint, addsTime, isNewGame, time }) => {
   const [height, setHeight] = useState(null);
   const [width, setWidth] = useState(null);
-  const [pinkPoints, setPinkPoints] = useState([]);
-  const [bluePoints, setBluePoints] = useState([]);
-  const [yellowPoints, setYellowPoints] = useState([]);
 
   const [playSkillSound] = useSound(skillSound, { volume: 0.4 });
+
+  const shop = useSelector(shopSelectors.getShop);
+  const pinkPoints = useSelector(pointsSelectors.getPinkPoints);
+  const bluePoints = useSelector(pointsSelectors.getBluePoints);
+  const yellowPoints = useSelector(pointsSelectors.getYellowPoints);
+
+  const dispatch = useDispatch();
 
   let fieldComponent = useRef(null);
   let createPinkPointIntervalId = useRef(null);
@@ -49,38 +70,26 @@ const Field = ({ addsPoint, addsTime, isNewGame, time, store, setStore }) => {
       clearInterval(createPinkPointIntervalId.current);
       clearInterval(createBluePointIntervalId.current);
       clearInterval(createYellowPointIntervalId.current);
-      setBluePoints([]);
-      setPinkPoints([]);
-      setYellowPoints([]);
+      dispatch(clearAllPoints());
     }
   }, [time]);
 
   useEffect(() => {
     if (isNewGame && height && width) {
-      console.log(height);
-      console.log(width);
-      createNewYellowPoint(1200, 300);
       createNewPinkPoint(1200, 300);
       createNewBluePoint(1200, 300);
+      createNewYellowPoint(1200, 300);
     } // eslint-disable-next-line
   }, [isNewGame, width, height]);
 
   const createNewPinkPoint = (minDelay, maxDelay) => {
     createPinkPointIntervalId.current = setTimeout(() => {
       const id = nanoid();
-      createPoint(setPinkPoints, id, width, height);
-      deletePointLaterSomeTime(setPinkPoints, id, 3000);
+      const newPoint = createPoint(id, width, height);
+      dispatch(createPinkPoint(newPoint));
+
+      deletePointLaterSomeTime(dispatch, deletePinkPoint, id, 3000);
       createNewPinkPoint(maxDelay, minDelay);
-    }, getRandomNumber(maxDelay, minDelay));
-  };
-  const createNewYellowPoint = (minDelay, maxDelay) => {
-    createYellowPointIntervalId.current = setTimeout(() => {
-      if (getRandomNumber(3, 0) === 2) {
-        const id = nanoid();
-        createPoint(setYellowPoints, id, width, height);
-        deletePointLaterSomeTime(setYellowPoints, id, 3000);
-      }
-      createNewYellowPoint(maxDelay, minDelay);
     }, getRandomNumber(maxDelay, minDelay));
   };
 
@@ -88,68 +97,66 @@ const Field = ({ addsPoint, addsTime, isNewGame, time, store, setStore }) => {
     createBluePointIntervalId.current = setTimeout(() => {
       if (getRandomNumber(7, 0) === 3) {
         const id = nanoid();
-        createPoint(setBluePoints, id, width, height);
-        deletePointLaterSomeTime(setBluePoints, id, 3000);
+        const newPoint = createPoint(id, width, height);
+        dispatch(createBluePoint(newPoint));
+        deletePointLaterSomeTime(dispatch, deleteBluePoint, id, 3000);
       }
       createNewBluePoint(maxDelay, minDelay);
     }, getRandomNumber(maxDelay, minDelay));
   };
 
+  const createNewYellowPoint = (minDelay, maxDelay) => {
+    createYellowPointIntervalId.current = setTimeout(() => {
+      if (getRandomNumber(3, 0) === 2) {
+        const id = nanoid();
+        const newPoint = createPoint(id, width, height);
+        dispatch(createYellowPoint(newPoint));
+        deletePointLaterSomeTime(dispatch, deleteYellowPoint, id, 3000);
+      }
+      createNewYellowPoint(maxDelay, minDelay);
+    }, getRandomNumber(maxDelay, minDelay));
+  };
+
   const activatePinkstormSkill = () => {
-    if (store.pinkstorm > 0) {
+    if (shop.pinkstorm.amount > 0) {
       playSkillSound();
-
-      setStore(({ pinkstorm, bluestorm, yellowstorm }) => ({
-        pinkstorm: pinkstorm - 1,
-        bluestorm,
-        yellowstorm,
-      }));
-
+      dispatch(deletePinkstorm());
       for (let i = 0; i < 30; i++) {
         setTimeout(() => {
           const id = nanoid();
-          createPoint(setPinkPoints, id, width, height);
-          deletePointLaterSomeTime(setPinkPoints, id, 10000);
+          const newPoint = createPoint(id, width, height);
+          dispatch(createPinkPoint(newPoint));
+          deletePointLaterSomeTime(dispatch, deletePinkPoint, id, 10000);
         }, getRandomNumber(1100));
       }
     }
   };
 
   const activateBluestormSkill = () => {
-    if (store.bluestorm > 0) {
+    if (shop.bluestorm.amount > 0) {
       playSkillSound();
-
-      setStore(({ pinkstorm, bluestorm, yellowstorm }) => ({
-        pinkstorm,
-        bluestorm: bluestorm - 1,
-        yellowstorm,
-      }));
-
+      dispatch(deleteBluestorm());
       for (let i = 0; i < 30; i++) {
         setTimeout(() => {
           const id = nanoid();
-          createPoint(setBluePoints, id, width, height);
-          deletePointLaterSomeTime(setBluePoints, id, 10000);
+          const newPoint = createPoint(id, width, height);
+          dispatch(createBluePoint(newPoint));
+          deletePointLaterSomeTime(dispatch, deleteBluePoint, id, 10000);
         }, getRandomNumber(1100));
       }
     }
   };
 
   const activateYellowstormSkill = () => {
-    if (store.yellowstorm > 0) {
+    if (shop.yellowstorm.amount > 0) {
       playSkillSound();
-
-      setStore(({ pinkstorm, bluestorm, yellowstorm }) => ({
-        pinkstorm,
-        bluestorm,
-        yellowstorm: yellowstorm - 1,
-      }));
-
+      dispatch(deleteYellowstorm());
       for (let i = 0; i < 30; i++) {
         setTimeout(() => {
           const id = nanoid();
-          createPoint(setYellowPoints, id, width, height);
-          deletePointLaterSomeTime(setYellowPoints, id, 10000);
+          const newPoint = createPoint(id, width, height);
+          dispatch(createYellowPoint(newPoint));
+          deletePointLaterSomeTime(dispatch, deleteYellowPoint, id, 10000);
         }, getRandomNumber(1100));
       }
     }
@@ -167,7 +174,7 @@ const Field = ({ addsPoint, addsTime, isNewGame, time, store, setStore }) => {
               <use href={sprite + "#lightning"}></use>
             </svg>
           </ButtonSkills>
-          <SkillsText>{store.pinkstorm}</SkillsText>
+          <SkillsText>{shop.pinkstorm.amount}</SkillsText>
         </ItemSkills>
         <ItemSkills>
           <ButtonSkills
@@ -178,7 +185,7 @@ const Field = ({ addsPoint, addsTime, isNewGame, time, store, setStore }) => {
               <use href={sprite + "#lightning"}></use>
             </svg>
           </ButtonSkills>
-          <SkillsText>{store.bluestorm}</SkillsText>
+          <SkillsText>{shop.bluestorm.amount}</SkillsText>
         </ItemSkills>
         <ItemSkills>
           <ButtonSkills
@@ -189,7 +196,7 @@ const Field = ({ addsPoint, addsTime, isNewGame, time, store, setStore }) => {
               <use href={sprite + "#lightning"}></use>
             </svg>
           </ButtonSkills>
-          <SkillsText>{store.yellowstorm}</SkillsText>
+          <SkillsText>{shop.yellowstorm.amount}</SkillsText>
         </ItemSkills>
       </WrapperSkills>
       <FieldGame ref={fieldComponent}>
@@ -201,7 +208,6 @@ const Field = ({ addsPoint, addsTime, isNewGame, time, store, setStore }) => {
             y={y}
             size={size}
             addsPoint={addsPoint}
-            setPinkPoints={setPinkPoints}
           />
         ))}
         {bluePoints?.map(({ id, x, y, size }) => (
@@ -212,7 +218,6 @@ const Field = ({ addsPoint, addsTime, isNewGame, time, store, setStore }) => {
             y={y}
             size={size}
             addsPoint={addsPoint}
-            setBluePoints={setBluePoints}
           />
         ))}
         {yellowPoints?.map(({ id, x, y, size }) => (
@@ -223,7 +228,6 @@ const Field = ({ addsPoint, addsTime, isNewGame, time, store, setStore }) => {
             y={y}
             size={size}
             addsTime={addsTime}
-            setYellowPoints={setYellowPoints}
           />
         ))}
       </FieldGame>

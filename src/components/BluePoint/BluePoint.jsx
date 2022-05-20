@@ -1,16 +1,20 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import useSound from "use-sound";
+import { deleteBluePoint } from "../../redux/points/points-slice";
 import bubbleSound from "../../assets/sounds/bubble-blue.mp3";
 import { Point } from "./BluePoint.styles";
 
-const PointBlue = ({ addsPoint, id, x, y, size: sizeProps, setBluePoints }) => {
+const PointBlue = ({ addsPoint, id, x, y, size: sizeProps }) => {
   const [size, setSize] = useState(sizeProps);
   const [hp, setHp] = useState(5);
 
   const [playBubbleSound] = useSound(bubbleSound, { volume: 0.4 });
 
+  const dispatch = useDispatch();
+
   const deleteBluePointOnClick = (id) => {
-    setBluePoints((prev) => prev.filter((point) => point.id !== id));
+    dispatch(deleteBluePoint(id));
   };
 
   const handleClick = () => {

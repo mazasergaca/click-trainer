@@ -1,5 +1,5 @@
-export const deletePointLaterSomeTime = (setPoints, id, delay) => {
+export const deletePointLaterSomeTime = (dispatch, deletePoint, id, delay) => {
   setTimeout(() => {
-    setPoints((prev) => prev.filter((point) => point.id !== id));
+    dispatch(deletePoint(id));
   }, delay);
 };

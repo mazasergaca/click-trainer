@@ -1,13 +1,17 @@
+import { useDispatch } from "react-redux";
 import useSound from "use-sound";
+import { deletePinkPoint } from "../../redux/points/points-slice";
 import bubbleSound from "../../assets/sounds/bubble-pink.mp3";
 
 import { Point } from "./PinkPoint.styles";
 
-const PinkPoint = ({ x, y, size, id, setPinkPoints, addsPoint }) => {
+const PinkPoint = ({ x, y, size, id, addsPoint }) => {
   const [playBubbleSound] = useSound(bubbleSound, { volume: 0.4 });
 
+  const dispatch = useDispatch();
+
   const deletePinkPointOnClick = (id) => {
-    setPinkPoints((prev) => prev.filter((point) => point.id !== id));
+    dispatch(deletePinkPoint(id));
   };
 
   const handleClick = () => {

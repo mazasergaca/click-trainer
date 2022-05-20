@@ -1,13 +1,17 @@
 import useSound from "use-sound";
+import { useDispatch } from "react-redux";
+import { deleteYellowPoint } from "../../redux/points/points-slice";
 import bubbleSound from "../../assets/sounds/bubble-yellow.mp3";
 
 import { Point } from "./YellowPoint.styles";
 
-const YellowPoint = ({ size, x, y, id, setYellowPoints, addsTime }) => {
+const YellowPoint = ({ size, x, y, id, addsTime }) => {
   const [playBubbleSound] = useSound(bubbleSound, { volume: 0.4 });
 
+  const dispatch = useDispatch();
+
   const deleteYellowPointOnClick = (id) => {
-    setYellowPoints((prev) => prev.filter((point) => point.id !== id));
+    dispatch(deleteYellowPoint(id));
   };
 
   const handleClick = () => {

@@ -61,6 +61,7 @@ export const ButtonMenu = styled.button`
 export const ContainerStore = styled.div`
   padding: 10px 10px;
   width: 90vw;
+  max-width: 400px;
   position: absolute;
   top: 50%;
   left: 50%;

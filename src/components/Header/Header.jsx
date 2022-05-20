@@ -1,3 +1,5 @@
+import { useSelector } from "react-redux";
+import infoSelectors from "../../redux/info/info-selects";
 import coin from "../../assets/images/coin.svg";
 import {
   Container,
@@ -5,11 +7,12 @@ import {
   WrapperItems,
   Item,
   Time,
-  Coins,
   CoinImage,
 } from "./Header.styles";
 
-const Header = ({ bestResult, time, coins, score }) => {
+const Header = ({ time, score }) => {
+  const coins = useSelector(infoSelectors.getCoins);
+  const bestResult = useSelector(infoSelectors.getBestResult);
   return (
     <Container>
       <WrapperItems>
