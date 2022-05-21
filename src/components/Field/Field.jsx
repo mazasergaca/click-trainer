@@ -8,6 +8,7 @@ import {
   deletePinkstorm,
   deleteYellowstorm,
 } from "../../redux/shop/shop-slice";
+import infoSelectors from "../../redux/info/info-selects";
 import shopSelectors from "../../redux/shop/shop-selectors";
 import pointsSelectors from "../../redux/points/points-selectors";
 import {
@@ -21,26 +22,23 @@ import {
 } from "../../redux/points/points-slice";
 import { deletePointLaterSomeTime } from "../../utils/deletePointLaterSomeTime";
 import { createPoint } from "../../utils/createPoint";
-import skillSound from "../../assets/sounds/skill.mp3";
-import sprite from "../../assets/images/sprite.svg";
 import { getRandomNumber } from "../../utils/getRandomNumber";
+import { startsCooldown } from "../../utils/startsCooldown";
+import skillSound from "../../assets/sounds/skill.mp3";
+import Skills from "../Skills/Skills";
 import BluePoint from "../BluePoint";
 import PinkPoint from "../PinkPoint/PinkPoint";
 import YellowPoint from "../YellowPoint/YellowPoint";
-import {
-  FieldGame,
-  WrapperSkills,
-  WrapperFieldGame,
-  ButtonSkills,
-  ItemSkills,
-  SkillsText,
-} from "./Field.styles";
+import { FieldGame, WrapperFieldGame } from "./Field.styles";
 
 const Field = ({ addsPoint, addsTime, isNewGame, time }) => {
   const [height, setHeight] = useState(null);
   const [width, setWidth] = useState(null);
-
-  const [playSkillSound] = useSound(skillSound, { volume: 0.4 });
+  const [cdPinkstorm, setCdPinkstorm] = useState(0);
+  const [cdBluestorm, setCdBluestorm] = useState(0);
+  const [cdYellowstorm, setCdYellowstorm] = useState(0);
+  const volume = useSelector(infoSelectors.getVolume);
+  const [playSkillSound] = useSound(skillSound, { volume });
 
   const shop = useSelector(shopSelectors.getShop);
   const pinkPoints = useSelector(pointsSelectors.getPinkPoints);
@@ -60,7 +58,7 @@ const Field = ({ addsPoint, addsTime, isNewGame, time }) => {
         Math.floor(fieldComponent.current.getBoundingClientRect().height) - 45
       );
       setWidth(
-        Math.floor(fieldComponent.current.getBoundingClientRect().width) - 45
+        Math.floor(fieldComponent.current.getBoundingClientRect().width) - 65
       );
     }
   }, [fieldComponent]);
@@ -70,6 +68,9 @@ const Field = ({ addsPoint, addsTime, isNewGame, time }) => {
       clearInterval(createPinkPointIntervalId.current);
       clearInterval(createBluePointIntervalId.current);
       clearInterval(createYellowPointIntervalId.current);
+      setCdPinkstorm(0);
+      setCdBluestorm(0);
+      setCdYellowstorm(0);
       dispatch(clearAllPoints());
     }
   }, [time]);
@@ -121,6 +122,8 @@ const Field = ({ addsPoint, addsTime, isNewGame, time }) => {
     if (shop.pinkstorm.amount > 0) {
       playSkillSound();
       dispatch(deletePinkstorm());
+      setCdPinkstorm(30);
+      startsCooldown(setCdPinkstorm);
       for (let i = 0; i < 30; i++) {
         setTimeout(() => {
           const id = nanoid();
@@ -136,6 +139,8 @@ const Field = ({ addsPoint, addsTime, isNewGame, time }) => {
     if (shop.bluestorm.amount > 0) {
       playSkillSound();
       dispatch(deleteBluestorm());
+      setCdBluestorm(30);
+      startsCooldown(setCdBluestorm);
       for (let i = 0; i < 30; i++) {
         setTimeout(() => {
           const id = nanoid();
@@ -151,6 +156,8 @@ const Field = ({ addsPoint, addsTime, isNewGame, time }) => {
     if (shop.yellowstorm.amount > 0) {
       playSkillSound();
       dispatch(deleteYellowstorm());
+      setCdYellowstorm(30);
+      startsCooldown(setCdYellowstorm);
       for (let i = 0; i < 30; i++) {
         setTimeout(() => {
           const id = nanoid();
@@ -164,41 +171,15 @@ const Field = ({ addsPoint, addsTime, isNewGame, time }) => {
 
   return (
     <WrapperFieldGame>
-      <WrapperSkills>
-        <ItemSkills>
-          <ButtonSkills
-            color="rgb(234, 72, 132)"
-            onClick={activatePinkstormSkill}
-          >
-            <svg fill="rgb(234, 72, 132)" width="100%" height="100%">
-              <use href={sprite + "#lightning"}></use>
-            </svg>
-          </ButtonSkills>
-          <SkillsText>{shop.pinkstorm.amount}</SkillsText>
-        </ItemSkills>
-        <ItemSkills>
-          <ButtonSkills
-            color="rgb(14, 180, 201)"
-            onClick={activateBluestormSkill}
-          >
-            <svg fill="rgb(14, 180, 201)" width="100%" height="100%">
-              <use href={sprite + "#lightning"}></use>
-            </svg>
-          </ButtonSkills>
-          <SkillsText>{shop.bluestorm.amount}</SkillsText>
-        </ItemSkills>
-        <ItemSkills>
-          <ButtonSkills
-            color="rgb(216, 250, 67)"
-            onClick={activateYellowstormSkill}
-          >
-            <svg fill="rgb(216, 250, 67)" width="100%" height="100%">
-              <use href={sprite + "#lightning"}></use>
-            </svg>
-          </ButtonSkills>
-          <SkillsText>{shop.yellowstorm.amount}</SkillsText>
-        </ItemSkills>
-      </WrapperSkills>
+      <Skills
+        shop={shop}
+        cdPinkstorm={cdPinkstorm}
+        cdBluestorm={cdBluestorm}
+        cdYellowstorm={cdYellowstorm}
+        activatePinkstormSkill={activatePinkstormSkill}
+        activateBluestormSkill={activateBluestormSkill}
+        activateYellowstormSkill={activateYellowstormSkill}
+      />
       <FieldGame ref={fieldComponent}>
         {pinkPoints?.map(({ id, x, y, size }) => (
           <PinkPoint

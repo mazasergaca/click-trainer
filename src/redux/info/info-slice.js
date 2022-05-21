@@ -4,6 +4,7 @@ const initialState = {
   name: "",
   coins: 0,
   bestResult: 0,
+  volume: 1,
 };
 
 const infoSlice = createSlice({
@@ -22,10 +23,18 @@ const infoSlice = createSlice({
     changeBestResult(state, action) {
       state.bestResult = action.payload;
     },
+    changeVolume(state, action) {
+      state.volume = action.payload;
+    },
   },
 });
 
-export const { rename, incrementCoins, decrementCoins, changeBestResult } =
-  infoSlice.actions;
+export const {
+  rename,
+  incrementCoins,
+  decrementCoins,
+  changeBestResult,
+  changeVolume,
+} = infoSlice.actions;
 
 export default infoSlice.reducer;

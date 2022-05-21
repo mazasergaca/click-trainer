@@ -10,6 +10,7 @@ import Field from "../../components/Field/Field";
 import StartPage from "../../components/StartPage";
 import Header from "../../components/Header/Header";
 import Menu from "../../components/Menu";
+import Volume from "../../components/Volume/Volume";
 import { Container } from "./Game.styles";
 
 const Game = () => {
@@ -18,12 +19,13 @@ const Game = () => {
   const [isStart, setIsStart] = useState(false);
   const [isNewGame, setIsNewGame] = useState(false);
   const [pathMenu, setPathMenu] = useState("menu");
+  const volume = useSelector(infoSelectors.getVolume);
 
   const dispatch = useDispatch();
   const bestResult = useSelector(infoSelectors.getBestResult);
 
-  const [playStartSound] = useSound(startSound, { volume: 0.4 });
-  const [playEndSound] = useSound(endSound, { volume: 0.4 });
+  const [playStartSound] = useSound(startSound, { volume });
+  const [playEndSound] = useSound(endSound, { volume });
 
   let timerIntervalId = useRef(null);
 
@@ -96,6 +98,7 @@ const Game = () => {
       ) : (
         <StartPage startGame={startGame} />
       )}
+      <Volume />
     </>
   );
 };

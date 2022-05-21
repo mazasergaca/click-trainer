@@ -1,12 +1,14 @@
 import useSound from "use-sound";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deleteYellowPoint } from "../../redux/points/points-slice";
+import infoSelectors from "../../redux/info/info-selects";
 import bubbleSound from "../../assets/sounds/bubble-yellow.mp3";
 
 import { Point } from "./YellowPoint.styles";
 
 const YellowPoint = ({ size, x, y, id, addsTime }) => {
-  const [playBubbleSound] = useSound(bubbleSound, { volume: 0.4 });
+  const volume = useSelector(infoSelectors.getVolume);
+  const [playBubbleSound] = useSound(bubbleSound, { volume });
 
   const dispatch = useDispatch();
 

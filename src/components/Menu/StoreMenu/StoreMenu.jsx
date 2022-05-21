@@ -23,7 +23,8 @@ import {
 } from "../Menu.styles";
 
 const StoreMenu = ({ changePathMenu }) => {
-  const [playBuySound] = useSound(buySound, { volume: 0.4 });
+  const volume = useSelector(infoSelectors.getVolume);
+  const [playBuySound] = useSound(buySound, { volume });
 
   const shop = useSelector(shopSelectors.getShop);
   const coins = useSelector(infoSelectors.getCoins);

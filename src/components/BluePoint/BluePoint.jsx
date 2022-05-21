@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import infoSelectors from "../../redux/info/info-selects";
 import useSound from "use-sound";
 import { deleteBluePoint } from "../../redux/points/points-slice";
 import bubbleSound from "../../assets/sounds/bubble-blue.mp3";
@@ -8,8 +9,9 @@ import { Point } from "./BluePoint.styles";
 const PointBlue = ({ addsPoint, id, x, y, size: sizeProps }) => {
   const [size, setSize] = useState(sizeProps);
   const [hp, setHp] = useState(5);
+  const volume = useSelector(infoSelectors.getVolume);
 
-  const [playBubbleSound] = useSound(bubbleSound, { volume: 0.4 });
+  const [playBubbleSound] = useSound(bubbleSound, { volume });
 
   const dispatch = useDispatch();
 
