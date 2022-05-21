@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/click-trainer/static/js/main.61a2f43c.js",
+    "main.js": "/click-trainer/static/js/main.a435f654.js",
     "static/js/845.9e281ba3.chunk.js": "/click-trainer/static/js/845.9e281ba3.chunk.js",
     "static/media/skill.mp3": "/click-trainer/static/media/skill.713c8dca85ad03cb5600.mp3",
     "static/media/end.mp3": "/click-trainer/static/media/end.9541edde87138a801475.mp3",
@@ -12,10 +12,10 @@
     "static/media/bubble-pink.mp3": "/click-trainer/static/media/bubble-pink.f5c9c096c9c232d95215.mp3",
     "index.html": "/click-trainer/index.html",
     "static/media/sprite.svg": "/click-trainer/static/media/sprite.14a21347757cf4cabd18750dcf1e45a6.svg",
-    "main.61a2f43c.js.map": "/click-trainer/static/js/main.61a2f43c.js.map",
+    "main.a435f654.js.map": "/click-trainer/static/js/main.a435f654.js.map",
     "845.9e281ba3.chunk.js.map": "/click-trainer/static/js/845.9e281ba3.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.61a2f43c.js"
+    "static/js/main.a435f654.js"
   ]
 }
