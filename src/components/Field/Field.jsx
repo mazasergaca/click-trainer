@@ -8,7 +8,7 @@ import {
   deletePinkstorm,
   deleteYellowstorm,
 } from "../../redux/shop/shop-slice";
-import infoSelectors from "../../redux/info/info-selects";
+import infoSelectors from "../../redux/info/info-selectors";
 import shopSelectors from "../../redux/shop/shop-selectors";
 import pointsSelectors from "../../redux/points/points-selectors";
 import {

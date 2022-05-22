@@ -1,7 +1,7 @@
 import useSound from "use-sound";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteYellowPoint } from "../../redux/points/points-slice";
-import infoSelectors from "../../redux/info/info-selects";
+import infoSelectors from "../../redux/info/info-selectors";
 import bubbleSound from "../../assets/sounds/bubble-yellow.mp3";
 
 import { Point } from "./YellowPoint.styles";

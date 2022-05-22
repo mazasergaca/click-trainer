@@ -1,12 +1,12 @@
 const getName = (state) => state.info.name;
 const getCoins = (state) => state.info.coins;
-const getBestResult = (state) => state.info.bestResult;
+const getAchievementPoints = (state) => state.info.achievementPoints;
 const getVolume = (state) => state.info.volume;
 
 const infoSelectors = {
   getName,
   getCoins,
-  getBestResult,
+  getAchievementPoints,
   getVolume,
 };
 export default infoSelectors;

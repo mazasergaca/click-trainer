@@ -2,8 +2,14 @@ import React, { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import useSound from "use-sound";
 
-import { changeBestResult, incrementCoins } from "../../redux/info/info-slice";
-import infoSelectors from "../../redux/info/info-selects";
+import {
+  changeRecord,
+  incrementGames,
+  incrementTotalCoins,
+} from "../../redux/achievement/achievement-slice";
+import { incrementCoins } from "../../redux/info/info-slice";
+import achievementSelectors from "../../redux/achievement/achivement-selectors";
+import infoSelectors from "../../redux/info/info-selectors";
 import endSound from "../../assets/sounds/end.mp3";
 import startSound from "../../assets/sounds/start.mp3";
 import Field from "../../components/Field/Field";
@@ -22,7 +28,7 @@ const Game = () => {
   const volume = useSelector(infoSelectors.getVolume);
 
   const dispatch = useDispatch();
-  const bestResult = useSelector(infoSelectors.getBestResult);
+  const bestResult = useSelector(achievementSelectors.getRecord);
 
   const [playStartSound] = useSound(startSound, { volume });
   const [playEndSound] = useSound(endSound, { volume });
@@ -32,9 +38,11 @@ const Game = () => {
   useEffect(() => {
     if (time === 0) {
       dispatch(incrementCoins(score));
+      dispatch(incrementTotalCoins(score));
+      dispatch(incrementGames());
       clearInterval(timerIntervalId.current);
       if (bestResult < score) {
-        dispatch(changeBestResult(score));
+        dispatch(changeRecord(score));
       }
       setIsNewGame(false);
       playEndSound();

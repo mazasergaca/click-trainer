@@ -3,8 +3,11 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   name: "",
   coins: 0,
-  bestResult: 0,
-  volume: 1,
+  achievementPoints: {
+    all: 1395,
+    inStock: 0,
+  },
+  volume: 0.3,
 };
 
 const infoSlice = createSlice({
@@ -20,8 +23,9 @@ const infoSlice = createSlice({
     decrementCoins(state, action) {
       state.coins -= action.payload;
     },
-    changeBestResult(state, action) {
-      state.bestResult = action.payload;
+    incrementAchievementPoints(state, action) {
+      console.log(action.payload);
+      state.achievementPoints.inStock += action.payload;
     },
     changeVolume(state, action) {
       state.volume = action.payload;
@@ -33,8 +37,8 @@ export const {
   rename,
   incrementCoins,
   decrementCoins,
-  changeBestResult,
   changeVolume,
+  incrementAchievementPoints,
 } = infoSlice.actions;
 
 export default infoSlice.reducer;

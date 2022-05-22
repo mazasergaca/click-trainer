@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import infoSelectors from "../../redux/info/info-selects";
+import infoSelectors from "../../redux/info/info-selectors";
 import { rename } from "../../redux/info/info-slice";
 import {
   Backdrop,

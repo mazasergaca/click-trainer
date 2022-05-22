@@ -7,6 +7,9 @@ const MainMenu = ({ score, startNewGame, changePathMenu }) => {
       <ItemMenu>You have {score} points </ItemMenu>
       <ButtonMenu onClick={startNewGame}>New game</ButtonMenu>
       <ButtonMenu onClick={() => changePathMenu("store")}>Store</ButtonMenu>
+      <ButtonMenu onClick={() => changePathMenu("achievement")}>
+        Achievement
+      </ButtonMenu>
     </MenuNav>
   );
 };

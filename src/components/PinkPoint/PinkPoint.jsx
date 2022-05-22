@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import useSound from "use-sound";
-import infoSelectors from "../../redux/info/info-selects";
+import infoSelectors from "../../redux/info/info-selectors";
 import { deletePinkPoint } from "../../redux/points/points-slice";
 import bubbleSound from "../../assets/sounds/bubble-pink.mp3";
 

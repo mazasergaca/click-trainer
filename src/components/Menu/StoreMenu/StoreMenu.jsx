@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import useSound from "use-sound";
-import infoSelectors from "../../../redux/info/info-selects";
+import infoSelectors from "../../../redux/info/info-selectors";
 import { decrementCoins } from "../../../redux/info/info-slice";
 import shopSelectors from "../../../redux/shop/shop-selectors";
 import {
@@ -13,7 +13,7 @@ import buySound from "../../../assets/sounds/buy.mp3";
 import coin from "../../../assets/images/coin.svg";
 import {
   ButtonMenu,
-  ContainerStore,
+  Container,
   StoreItem,
   ButtonStore,
   WrapperStoreItem,
@@ -55,7 +55,7 @@ const StoreMenu = ({ changePathMenu }) => {
     }
   };
   return (
-    <ContainerStore>
+    <Container>
       <ButtonMenu onClick={() => changePathMenu("menu")}>back</ButtonMenu>
       <StoreItem>
         <WrapperStoreItem>
@@ -129,7 +129,7 @@ const StoreMenu = ({ changePathMenu }) => {
           </WrapperStoreItem>
         </FlexWrapper>
       </StoreItem>
-    </ContainerStore>
+    </Container>
   );
 };
 export default StoreMenu;

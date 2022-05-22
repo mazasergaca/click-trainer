@@ -2,15 +2,15 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   pinkstorm: {
-    amount: 1,
+    amount: 0,
     price: 20,
   },
   bluestorm: {
-    amount: 1,
+    amount: 0,
     price: 35,
   },
   yellowstorm: {
-    amount: 1,
+    amount: 0,
     price: 40,
   },
 };

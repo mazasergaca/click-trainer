@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
-import infoSelectors from "../../redux/info/info-selects";
+import infoSelectors from "../../redux/info/info-selectors";
+import achievementSelectors from "../../redux/achievement/achivement-selectors";
 import coin from "../../assets/images/coin.svg";
 import {
   Container,
@@ -12,7 +13,7 @@ import {
 
 const Header = ({ time, score }) => {
   const coins = useSelector(infoSelectors.getCoins);
-  const bestResult = useSelector(infoSelectors.getBestResult);
+  const bestResult = useSelector(achievementSelectors.getRecord);
   return (
     <Container>
       <WrapperItems>
