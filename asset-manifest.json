@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.js": "/click-trainer/static/js/main.387413d9.js",
-    "static/js/845.9e281ba3.chunk.js": "/click-trainer/static/js/845.9e281ba3.chunk.js",
-    "static/media/skill.mp3": "/click-trainer/static/media/skill.713c8dca85ad03cb5600.mp3",
-    "static/media/end.mp3": "/click-trainer/static/media/end.9541edde87138a801475.mp3",
-    "static/media/bubble-yellow.mp3": "/click-trainer/static/media/bubble-yellow.7d3a10139e0970092c3c.mp3",
-    "static/media/bubble-blue.mp3": "/click-trainer/static/media/bubble-blue.5c3400251d32a294cd86.mp3",
-    "static/media/achievement.mp3": "/click-trainer/static/media/achievement.22cede82771d375b227f.mp3",
-    "static/media/start.mp3": "/click-trainer/static/media/start.e1ffd2e4262dfbca0d4c.mp3",
-    "static/media/buy.mp3": "/click-trainer/static/media/buy.fdf26345b16d7374ad10.mp3",
-    "static/media/coin.svg": "/click-trainer/static/media/coin.71d9acd35000a2b93cf7367b2b3824d2.svg",
-    "static/media/bubble-pink.mp3": "/click-trainer/static/media/bubble-pink.f5c9c096c9c232d95215.mp3",
-    "index.html": "/click-trainer/index.html",
-    "static/media/sprite.svg": "/click-trainer/static/media/sprite.14a21347757cf4cabd18750dcf1e45a6.svg",
-    "main.387413d9.js.map": "/click-trainer/static/js/main.387413d9.js.map",
-    "845.9e281ba3.chunk.js.map": "/click-trainer/static/js/845.9e281ba3.chunk.js.map"
+    "main.js": "/clickstorm/static/js/main.3bcd583d.js",
+    "static/js/845.9e281ba3.chunk.js": "/clickstorm/static/js/845.9e281ba3.chunk.js",
+    "static/media/skill.mp3": "/clickstorm/static/media/skill.713c8dca85ad03cb5600.mp3",
+    "static/media/end.mp3": "/clickstorm/static/media/end.9541edde87138a801475.mp3",
+    "static/media/bubble-yellow.mp3": "/clickstorm/static/media/bubble-yellow.7d3a10139e0970092c3c.mp3",
+    "static/media/bubble-blue.mp3": "/clickstorm/static/media/bubble-blue.5c3400251d32a294cd86.mp3",
+    "static/media/achievement.mp3": "/clickstorm/static/media/achievement.22cede82771d375b227f.mp3",
+    "static/media/start.mp3": "/clickstorm/static/media/start.e1ffd2e4262dfbca0d4c.mp3",
+    "static/media/buy.mp3": "/clickstorm/static/media/buy.fdf26345b16d7374ad10.mp3",
+    "static/media/coin.svg": "/clickstorm/static/media/coin.71d9acd35000a2b93cf7367b2b3824d2.svg",
+    "static/media/bubble-pink.mp3": "/clickstorm/static/media/bubble-pink.f5c9c096c9c232d95215.mp3",
+    "index.html": "/clickstorm/index.html",
+    "static/media/sprite.svg": "/clickstorm/static/media/sprite.14a21347757cf4cabd18750dcf1e45a6.svg",
+    "main.3bcd583d.js.map": "/clickstorm/static/js/main.3bcd583d.js.map",
+    "845.9e281ba3.chunk.js.map": "/clickstorm/static/js/845.9e281ba3.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.387413d9.js"
+    "static/js/main.3bcd583d.js"
   ]
 }
