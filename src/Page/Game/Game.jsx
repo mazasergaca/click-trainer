@@ -1,91 +1,105 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import useSound from "use-sound";
+// import { useSelector, useDispatch } from "react-redux";
+// import useSound from "use-sound";
 
-import {
-  changeRecord,
-  incrementGames,
-  incrementTotalCoins,
-} from "../../redux/achievement/achievement-slice";
-import { incrementCoins } from "../../redux/info/info-slice";
-import achievementSelectors from "../../redux/achievement/achivement-selectors";
-import infoSelectors from "../../redux/info/info-selectors";
-import endSound from "../../assets/sounds/end.mp3";
-import startSound from "../../assets/sounds/start.mp3";
-import Field from "../../components/Field/Field";
-import StartPage from "../../components/StartPage";
-import Header from "../../components/Header/Header";
-import Menu from "../../components/Menu";
+// import {
+//   changeRecord,
+//   incrementGames,
+//   incrementTotalCoins,
+// } from "../../redux/achievement/achievement-slice";
+// import { incrementCoins } from "../../redux/info/info-slice";
+// import achievementSelectors from "../../redux/achievement/achivement-selectors";
+// import infoSelectors from "../../redux/info/info-selectors";
+// import endSound from "../../assets/sounds/end.mp3";
+// import startSound from "../../assets/sounds/start.mp3";
+// import Field from "../../components/Field/Field";
+import StartPage from "../Start";
+// import Header from "../../components/Header/Header";
+// import Menu from "../../components/Menu";
 import Volume from "../../components/Volume/Volume";
-import { Container } from "./Game.styles";
+// import { Container } from "./Game.styles";
+
+// import {
+//   useUpdateUserMutation,
+//   useGetUserByIdQuery,
+// } from "../../redux/info/info-api";
 
 const Game = () => {
-  const [score, setScore] = useState(0);
-  const [time, setTime] = useState(10);
-  const [isStart, setIsStart] = useState(false);
-  const [isNewGame, setIsNewGame] = useState(false);
-  const [pathMenu, setPathMenu] = useState("menu");
-  const volume = useSelector(infoSelectors.getVolume);
+  // const [score, setScore] = useState(0);
+  // const [time, setTime] = useState(10);
+  // const [isStart, setIsStart] = useState(false);
+  // const [isNewGame, setIsNewGame] = useState(false);
+  // const [pathMenu, setPathMenu] = useState("menu");
+  // const volume = useSelector(infoSelectors.getVolume);
 
-  const dispatch = useDispatch();
-  const bestResult = useSelector(achievementSelectors.getRecord);
+  // const dispatch = useDispatch();
+  // const bestResult = useSelector(achievementSelectors.getRecord);
 
-  const [playStartSound] = useSound(startSound, { volume });
-  const [playEndSound] = useSound(endSound, { volume });
+  // const [playStartSound] = useSound(startSound, { volume });
+  // const [playEndSound] = useSound(endSound, { volume });
 
-  let timerIntervalId = useRef(null);
+  // let timerIntervalId = useRef(null);
 
-  useEffect(() => {
-    if (time === 0) {
-      dispatch(incrementCoins(score));
-      dispatch(incrementTotalCoins(score));
-      dispatch(incrementGames());
-      clearInterval(timerIntervalId.current);
-      if (bestResult < score) {
-        dispatch(changeRecord(score));
-      }
-      setIsNewGame(false);
-      playEndSound();
-    } // eslint-disable-next-line
-  }, [time]);
+  // const { data } = useGetUserByIdQuery("629e04c2691be3ea75c53ecd");
+  // const [updateUser] = useUpdateUserMutation();
 
-  const timer = () => {
-    timerIntervalId.current = setInterval(() => {
-      setTime((prev) => prev - 1);
-    }, 1000);
-  };
+  // useEffect(() => {
+  //   if (time === 0) {
+  //     // dispatch(incrementCoins(score));
 
-  const startGame = () => {
-    setIsStart(true);
-    setIsNewGame(true);
-    timer();
-    playStartSound();
-  };
+  //     updateUser({
+  //       id: "629e04c2691be3ea75c53ecd",
+  //       data: { coins: data.coins + score },
+  //     });
 
-  const startNewGame = () => {
-    setIsNewGame(true);
-    setTime(10);
-    setScore(0);
-    timer();
-    playStartSound();
-  };
+  //     dispatch(incrementTotalCoins(score));
+  //     dispatch(incrementGames());
+  //     clearInterval(timerIntervalId.current);
+  //     if (bestResult < score) {
+  //       dispatch(changeRecord(score));
+  //     }
+  //     setIsNewGame(false);
+  //     playEndSound();
+  //   } // eslint-disable-next-line
+  // }, [time]);
 
-  const addsPoint = () => {
-    setScore((prev) => prev + 1);
-  };
+  // const timer = () => {
+  //   timerIntervalId.current = setInterval(() => {
+  //     setTime((prev) => prev - 1);
+  //   }, 1000);
+  // };
 
-  const addsTime = () => {
-    setTime((prev) => prev + 1);
-  };
+  // const startGame = () => {
+  //   setIsStart(true);
+  //   setIsNewGame(true);
+  //   timer();
+  //   playStartSound();
+  // };
 
-  const changePathMenu = (name) => {
-    playStartSound();
-    setPathMenu(name);
-  };
+  // const startNewGame = () => {
+  //   setIsNewGame(true);
+  //   setTime(10);
+  //   setScore(0);
+  //   timer();
+  //   playStartSound();
+  // };
+
+  // const addsPoint = () => {
+  //   setScore((prev) => prev + 1);
+  // };
+
+  // const addsTime = () => {
+  //   setTime((prev) => prev + 1);
+  // };
+
+  // const changePathMenu = (name) => {
+  //   playStartSound();
+  //   setPathMenu(name);
+  // };
 
   return (
     <>
-      {isStart ? (
+      {/* {isStart ? (
         <Container>
           <Header time={time} score={score} />
           <Field
@@ -103,10 +117,9 @@ const Game = () => {
             />
           )}
         </Container>
-      ) : (
-        <StartPage startGame={startGame} />
-      )}
-      <Volume />
+      ) : ( */}
+      {/* )} */}
+      {/* <Volume /> */}
     </>
   );
 };

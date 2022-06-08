@@ -1,13 +1,12 @@
 import React from "react";
+import RoutesComponent from "./components/Routes/Routes";
 import { GLobalStyles } from "./styles/global";
-
-import Game from "./Page/Game";
 
 const App = () => {
   return (
     <>
       <GLobalStyles />
-      <Game />
+      <RoutesComponent />
     </>
   );
 };

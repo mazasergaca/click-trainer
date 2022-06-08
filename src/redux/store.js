@@ -10,30 +10,21 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import { baseApi } from "./base-api";
+import userSlice from "./user/user-slice";
 import pointReducer from "./points/points-slice";
-import shopReducer from "./shop/shop-slice";
-import infoReducer from "./info/info-slice";
-import achievementReducer from "./achievement/achievement-slice";
 
-const shopPersistConfig = {
-  key: "shop",
+const userPersistConfig = {
+  key: "user",
   storage,
-};
-const infoPersistConfig = {
-  key: "info",
-  storage,
-};
-const achievementPersistConfig = {
-  key: "achievement",
-  storage,
+  whitelist: ["token"],
 };
 
 export const store = configureStore({
   reducer: {
-    points: pointReducer,
-    shop: persistReducer(shopPersistConfig, shopReducer),
-    info: persistReducer(infoPersistConfig, infoReducer),
-    achievement: persistReducer(achievementPersistConfig, achievementReducer),
+    [baseApi.reducerPath]: baseApi.reducer,
+    // points: pointReducer,
+    user: persistReducer(userPersistConfig, userSlice),
   },
   devTools: process.env.NODE_ENV === "development",
   middleware: (getDefaultMiddleware) =>
@@ -41,7 +32,7 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }),
+    }).concat(baseApi.middleware),
 });
 
 export const persistor = persistStore(store);

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const Backdrop = styled.div`
   width: 100vw;
@@ -17,40 +18,7 @@ export const Wrapper = styled.div`
   align-items: center;
 `;
 
-export const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-export const Label = styled.label`
-  margin-bottom: 30px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  font-size: 18px;
-
-  @media screen and (min-width: 768px) {
-    flex-direction: row;
-    font-size: 26px;
-  }
-`;
-
-export const Input = styled.input`
-  width: 300px;
-  margin-top: 10px;
-  padding: 4px 5px;
-
-  font-family: "Press Start 2P", cursive;
-  font-size: 20px;
-
-  @media screen and (min-width: 768px) {
-    margin-left: 10px;
-  }
-`;
-
-export const ButtonMenu = styled.button`
+export const LinkStyled = styled(Link)`
   padding: 13px 35px;
 
   font-family: "Press Start 2P", cursive;
@@ -66,6 +34,10 @@ export const ButtonMenu = styled.button`
 
   &:hover {
     border-color: rgb(234, 72, 132);
+  }
+
+  &:not(:last-child) {
+    margin-bottom: 25px;
   }
 `;
 
