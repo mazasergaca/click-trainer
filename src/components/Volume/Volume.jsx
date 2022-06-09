@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import infoSelectors from "../../redux/info/info-selectors";
-import { changeVolume } from "../../redux/info/info-slice";
+import userSelectors from "../../redux/user/user-selectors";
+import { changeVolume } from "../../redux/user/user-slice";
 import { FaVolumeUp, FaVolumeMute, FaVolumeDown } from "react-icons/fa";
 import { Wrapper, WrapperVolume, Input, Backdrop } from "./Volume.style";
 
@@ -13,7 +13,7 @@ const Volume = () => {
   };
 
   const dispatch = useDispatch();
-  const volume = useSelector(infoSelectors.getVolume);
+  const volume = useSelector(userSelectors.getVolume);
 
   const oldVolume = useRef(0.3);
 

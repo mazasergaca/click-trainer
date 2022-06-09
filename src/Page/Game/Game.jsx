@@ -1,49 +1,55 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import useSound from "use-sound";
-
+import userSelectors from "../../redux/user/user-selectors";
 import {
-  changeRecord,
-  incrementGames,
-  incrementTotalCoins,
-} from "../../redux/achievement/achievement-slice";
-import { incrementCoins } from "../../redux/info/info-slice";
-import achievementSelectors from "../../redux/achievement/achivement-selectors";
-import infoSelectors from "../../redux/info/info-selectors";
+  useUpdateUserMutation,
+  useGetCurrentUserQuery,
+} from "../../redux/base-api";
 import endSound from "../../assets/sounds/end.mp3";
 import startSound from "../../assets/sounds/start.mp3";
 import Field from "../../components/Field/Field";
-import StartPage from "../../components/StartPage";
 import Header from "../../components/Header/Header";
-import Menu from "../../components/Menu";
-import Volume from "../../components/Volume/Volume";
+import Menu from "../../components/ModalGame";
 import { Container } from "./Game.styles";
 
 const Game = () => {
   const [score, setScore] = useState(0);
   const [time, setTime] = useState(10);
-  const [isStart, setIsStart] = useState(false);
   const [isNewGame, setIsNewGame] = useState(false);
-  const [pathMenu, setPathMenu] = useState("menu");
-  const volume = useSelector(infoSelectors.getVolume);
 
-  const dispatch = useDispatch();
-  const bestResult = useSelector(achievementSelectors.getRecord);
+  const volume = useSelector(userSelectors.getVolume);
+
+  // const dispatch = useDispatch();
+  // const bestResult = useSelector(achievementSelectors.getRecord);
 
   const [playStartSound] = useSound(startSound, { volume });
   const [playEndSound] = useSound(endSound, { volume });
+  const { data: user } = useGetCurrentUserQuery();
+  const [updateUser] = useUpdateUserMutation();
 
   let timerIntervalId = useRef(null);
 
   useEffect(() => {
-    if (time === 0) {
-      dispatch(incrementCoins(score));
-      dispatch(incrementTotalCoins(score));
-      dispatch(incrementGames());
+    setIsNewGame(true);
+    setTime(10);
+    setScore(0);
+    timer();
+    return () => {
       clearInterval(timerIntervalId.current);
-      if (bestResult < score) {
-        dispatch(changeRecord(score));
-      }
+      setTime(0);
+      setIsNewGame(false);
+    };
+    // eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    if (time === 0) {
+      clearInterval(timerIntervalId.current);
+      updateUser({ coins: user.coins + score });
+      // if (bestResult < score) {
+      //changes record
+      // }
       setIsNewGame(false);
       playEndSound();
     } // eslint-disable-next-line
@@ -53,13 +59,6 @@ const Game = () => {
     timerIntervalId.current = setInterval(() => {
       setTime((prev) => prev - 1);
     }, 1000);
-  };
-
-  const startGame = () => {
-    setIsStart(true);
-    setIsNewGame(true);
-    timer();
-    playStartSound();
   };
 
   const startNewGame = () => {
@@ -78,35 +77,18 @@ const Game = () => {
     setTime((prev) => prev + 1);
   };
 
-  const changePathMenu = (name) => {
-    playStartSound();
-    setPathMenu(name);
-  };
-
   return (
     <>
-      {isStart ? (
-        <Container>
-          <Header time={time} score={score} />
-          <Field
-            time={time}
-            addsPoint={addsPoint}
-            isNewGame={isNewGame}
-            addsTime={addsTime}
-          />
-          {!isNewGame && (
-            <Menu
-              pathMenu={pathMenu}
-              changePathMenu={changePathMenu}
-              score={score}
-              startNewGame={startNewGame}
-            />
-          )}
-        </Container>
-      ) : (
-        <StartPage startGame={startGame} />
-      )}
-      <Volume />
+      <Container>
+        <Header time={time} score={score} />
+        <Field
+          time={time}
+          addsPoint={addsPoint}
+          isNewGame={isNewGame}
+          addsTime={addsTime}
+        />
+        {!isNewGame && <Menu score={score} startNewGame={startNewGame} />}
+      </Container>
     </>
   );
 };

@@ -24,7 +24,6 @@ const infoSlice = createSlice({
       state.coins -= action.payload;
     },
     incrementAchievementPoints(state, action) {
-      console.log(action.payload);
       state.achievementPoints.inStock += action.payload;
     },
     changeVolume(state, action) {

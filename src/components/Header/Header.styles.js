@@ -34,13 +34,10 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const WrapperItems = styled.div`
+export const WrapperRecord = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`;
-
-export const Item = styled.span`
   display: none;
   @media screen and (min-width: 768px) {
     display: block;
@@ -48,6 +45,13 @@ export const Item = styled.span`
   @media screen and (min-width: 1280px) {
   }
 `;
+export const WrapperItems = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const Item = styled.span``;
 
 export const CoinImage = styled.img`
   width: 20px;

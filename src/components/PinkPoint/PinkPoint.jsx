@@ -1,13 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 import useSound from "use-sound";
-import infoSelectors from "../../redux/info/info-selectors";
+import userSelectors from "../../redux/user/user-selectors";
 import { deletePinkPoint } from "../../redux/points/points-slice";
 import bubbleSound from "../../assets/sounds/bubble-pink.mp3";
 
 import { Point } from "./PinkPoint.styles";
 
 const PinkPoint = ({ x, y, size, id, addsPoint }) => {
-  const volume = useSelector(infoSelectors.getVolume);
+  const volume = useSelector(userSelectors.getVolume);
   const [playBubbleSound] = useSound(bubbleSound, { volume });
 
   const dispatch = useDispatch();

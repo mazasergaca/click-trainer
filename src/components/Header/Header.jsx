@@ -1,10 +1,10 @@
-import { useSelector } from "react-redux";
-import infoSelectors from "../../redux/info/info-selectors";
-import achievementSelectors from "../../redux/achievement/achivement-selectors";
+import React from "react";
+import { useGetCurrentUserQuery } from "../../redux/base-api";
 import coin from "../../assets/images/coin.svg";
 import {
   Container,
   Wrapper,
+  WrapperRecord,
   WrapperItems,
   Item,
   Time,
@@ -12,19 +12,18 @@ import {
 } from "./Header.styles";
 
 const Header = ({ time, score }) => {
-  const coins = useSelector(infoSelectors.getCoins);
-  const bestResult = useSelector(achievementSelectors.getRecord);
+  const { data: user } = useGetCurrentUserQuery();
+
   return (
     <Container>
-      <WrapperItems>
+      <WrapperRecord>
         <Item>My record:</Item>
-        <Item>{bestResult}</Item>
-      </WrapperItems>
+        <Item>0</Item>
+      </WrapperRecord>
       <Time>{time}</Time>
       <Wrapper>
         <WrapperItems>
-          <Item>Coins:</Item>
-          {coins}
+          <Item>Coins: {user?.coins}</Item>
           <CoinImage src={coin} alt="coin" />
         </WrapperItems>
         <WrapperItems>Score:{score}</WrapperItems>
