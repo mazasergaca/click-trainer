@@ -1,15 +1,14 @@
 const getIsLoggedIn = (state) => state.user.isLoggedIn;
-
+const getUsername = (state) => state.user.username;
 const getToken = (state) => state.user.token;
-
-const getUser = (state) => state.user.user;
-
 const getIsFetchingCurrentUser = (state) => state.user.isFetchingCurrentUser;
+const getVolume = (state) => state.user.volume;
 
 const userSelectors = {
   getIsLoggedIn,
   getToken,
   getIsFetchingCurrentUser,
-  getUser,
+  getVolume,
+  getUsername,
 };
 export default userSelectors;

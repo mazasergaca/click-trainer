@@ -13,7 +13,7 @@ export const baseApi = createApi({
       return headers;
     },
   }),
-  tagTypes: [],
+  tagTypes: ["User"],
   endpoints: (builder) => ({
     registration: builder.mutation({
       query({ username, password }) {
@@ -40,6 +40,26 @@ export const baseApi = createApi({
           method: "GET",
         };
       },
+      invalidatesTags: ["User"],
+    }),
+    getCurrentUser: builder.query({
+      query() {
+        return {
+          url: `/users/current`,
+          method: "GET",
+        };
+      },
+      providesTags: ["User"],
+    }),
+    updateUser: builder.mutation({
+      query(body) {
+        return {
+          url: `/users/update`,
+          method: "PUT",
+          body,
+        };
+      },
+      invalidatesTags: ["User"],
     }),
   }),
 });
@@ -48,4 +68,6 @@ export const {
   useRegistrationMutation,
   useLoginMutation,
   useFetchCurrentUserMutation,
+  useUpdateUserMutation,
+  useGetCurrentUserQuery,
 } = baseApi;

@@ -1,8 +1,12 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import useSound from "use-sound";
 import {
   useLoginMutation,
   useRegistrationMutation,
 } from "../../redux/base-api";
+import userSelectors from "../../redux/user/user-selectors";
+import pressSound from "../../assets/sounds/start.mp3";
 import {
   FormStyled,
   Label,
@@ -15,6 +19,10 @@ import {
 const Form = ({ title, typeSubmit }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const volume = useSelector(userSelectors.getVolume);
+
+  const [playSound] = useSound(pressSound, { volume });
 
   const [login] = useLoginMutation();
   const [registration] = useRegistrationMutation();
@@ -33,7 +41,10 @@ const Form = ({ title, typeSubmit }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!username || !password) return;
+
     try {
+      playSound();
       if (typeSubmit === "login") {
         await login({ username, password }).unwrap();
       } else if (typeSubmit === "registration") {
@@ -54,7 +65,9 @@ const Form = ({ title, typeSubmit }) => {
   return (
     <>
       <FormStyled onSubmit={handleSubmit}>
-        <LinkStyled to="/">ᐊ</LinkStyled>
+        <LinkStyled to="/" onClick={playSound}>
+          ᐊ
+        </LinkStyled>
         <Title>{title}</Title>
         <Label>
           Username
