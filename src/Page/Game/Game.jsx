@@ -16,7 +16,7 @@ import { Container } from "./Game.styles";
 const Game = () => {
   const [score, setScore] = useState(0);
   const [time, setTime] = useState(10);
-  const [isNewGame, setIsNewGame] = useState(false);
+  const [isNewGame, setIsNewGame] = useState(true);
 
   const volume = useSelector(userSelectors.getVolume);
 
@@ -38,7 +38,6 @@ const Game = () => {
     return () => {
       clearInterval(timerIntervalId.current);
       setTime(0);
-      setIsNewGame(false);
     };
     // eslint-disable-next-line
   }, []);

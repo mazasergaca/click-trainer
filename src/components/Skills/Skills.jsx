@@ -5,7 +5,7 @@ const Skills = ({
   activatePinkstormSkill,
   activateBluestormSkill,
   activateYellowstormSkill,
-  shop,
+  user,
   cdPinkstorm,
   cdBluestorm,
   cdYellowstorm,
@@ -23,7 +23,7 @@ const Skills = ({
             <use href={sprite + "#lightning"}></use>
           </svg>
         </Button>
-        <Text>{shop.pinkstorm.amount}</Text>
+        <Text>{user?.skills.pinkstorm}</Text>
       </Item>
       <Item>
         <Button
@@ -36,7 +36,7 @@ const Skills = ({
             <use href={sprite + "#lightning"}></use>
           </svg>
         </Button>
-        <Text>{shop.bluestorm.amount}</Text>
+        <Text>{user?.skills.bluestorm}</Text>
       </Item>
       <Item>
         <Button
@@ -49,7 +49,7 @@ const Skills = ({
             <use href={sprite + "#lightning"}></use>
           </svg>
         </Button>
-        <Text>{shop.yellowstorm.amount}</Text>
+        <Text>{user?.skills.yellowstorm}</Text>
       </Item>
     </Wrapper>
   );

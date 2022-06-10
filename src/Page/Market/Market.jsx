@@ -1,6 +1,6 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { PulseLoader } from "react-spinners";
 import userSelectors from "../../redux/user/user-selectors";
 import shopSelectors from "../../redux/shop/shop-selectors";
 import {
@@ -25,8 +25,6 @@ import {
 } from "./Market.styles";
 
 const Market = () => {
-  const navigation = useNavigate();
-
   const volume = useSelector(userSelectors.getVolume);
   const [playBuySound] = useSound(buySound, { volume });
   const [playSound] = useSound(pressSound, { volume });
@@ -34,7 +32,8 @@ const Market = () => {
   const shop = useSelector(shopSelectors.getShop);
   const { data: user } = useGetCurrentUserQuery();
 
-  const [updateUser] = useUpdateUserMutation();
+  const [updateUser, { isLoading: isLoadingUpdateUser }] =
+    useUpdateUserMutation();
 
   const handleBuyPinkStorm = async () => {
     if (user.coins >= shop.pinkstorm.price) {
@@ -78,9 +77,6 @@ const Market = () => {
     }
   };
 
-  const onCickGoBack = () => {
-    navigation("/menu");
-  };
   return (
     <Container>
       <Wrapper>
@@ -102,7 +98,9 @@ const Market = () => {
             <Text>{user?.skills.pinkstorm}</Text>
             <ButtonStore
               type="button"
-              disabled={user?.coins < shop.pinkstorm.price}
+              disabled={
+                user?.coins < shop.pinkstorm.price || isLoadingUpdateUser
+              }
               onClick={handleBuyPinkStorm}
             >
               buy
@@ -124,7 +122,9 @@ const Market = () => {
             <Text>{user?.skills.bluestorm}</Text>
             <ButtonStore
               type="button"
-              disabled={user?.coins < shop.bluestorm.price}
+              disabled={
+                user?.coins < shop.bluestorm.price || isLoadingUpdateUser
+              }
               onClick={handleBuyBlueStorm}
             >
               buy
@@ -146,7 +146,9 @@ const Market = () => {
             <Text>{user?.skills.yellowstorm}</Text>
             <ButtonStore
               type="button"
-              disabled={user?.coins < shop.yellowstorm.price}
+              disabled={
+                user?.coins < shop.yellowstorm.price || isLoadingUpdateUser
+              }
               onClick={handleBuyYellowStorm}
             >
               buy

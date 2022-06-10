@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import useSound from "use-sound";
+import { PulseLoader } from "react-spinners";
 import {
   useLoginMutation,
   useRegistrationMutation,
@@ -24,8 +25,9 @@ const Form = ({ title, typeSubmit }) => {
 
   const [playSound] = useSound(pressSound, { volume });
 
-  const [login] = useLoginMutation();
-  const [registration] = useRegistrationMutation();
+  const [login, { isLoading: isLoadingLogin }] = useLoginMutation();
+  const [registration, { isLoading: isLoadingRegistration }] =
+    useRegistrationMutation();
 
   const handleChange = (e) => {
     switch (e.target.name) {
@@ -49,6 +51,7 @@ const Form = ({ title, typeSubmit }) => {
         await login({ username, password }).unwrap();
       } else if (typeSubmit === "registration") {
         await registration({ username, password }).unwrap();
+        await login({ username, password }).unwrap();
       }
     } catch (err) {
       console.log(err);
@@ -87,7 +90,13 @@ const Form = ({ title, typeSubmit }) => {
             onChange={handleChange}
           />
         </Label>
-        <Button type="submit">Go</Button>
+        <Button type="submit">
+          {!isLoadingLogin && !isLoadingRegistration ? (
+            "Go"
+          ) : (
+            <PulseLoader color="#fff" />
+          )}
+        </Button>
       </FormStyled>
     </>
   );
