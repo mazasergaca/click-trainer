@@ -13,6 +13,11 @@ export const Wrapper = styled.div`
   }
 `;
 
+export const Title = styled.h1`
+  margin-bottom: 15px;
+  text-align: center;
+`;
+
 export const LinkStyled = styled(Link)`
   position: absolute;
   left: 20px;

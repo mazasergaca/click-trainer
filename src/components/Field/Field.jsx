@@ -2,14 +2,11 @@ import React, { useState, useRef, useEffect } from "react";
 import { nanoid } from "nanoid";
 import useSound from "use-sound";
 import { useSelector, useDispatch } from "react-redux";
-
 import {
-  deleteBluestorm,
-  deletePinkstorm,
-  deleteYellowstorm,
-} from "../../redux/shop/shop-slice";
-import infoSelectors from "../../redux/info/info-selectors";
-import shopSelectors from "../../redux/shop/shop-selectors";
+  useGetCurrentUserQuery,
+  useUpdateUserMutation,
+} from "../../redux/base-api";
+import userSelectors from "../../redux/user/user-selectors";
 import pointsSelectors from "../../redux/points/points-selectors";
 import {
   createPinkPoint,
@@ -34,13 +31,15 @@ import { FieldGame, WrapperFieldGame } from "./Field.styles";
 const Field = ({ addsPoint, addsTime, isNewGame, time }) => {
   const [height, setHeight] = useState(null);
   const [width, setWidth] = useState(null);
-  // const [cdPinkstorm, setCdPinkstorm] = useState(0);
-  // const [cdBluestorm, setCdBluestorm] = useState(0);
-  // const [cdYellowstorm, setCdYellowstorm] = useState(0);
-  // const volume = useSelector(infoSelectors.getVolume);
-  // const [playSkillSound] = useSound(skillSound, { volume });
+  const [cdPinkstorm, setCdPinkstorm] = useState(0);
+  const [cdBluestorm, setCdBluestorm] = useState(0);
+  const [cdYellowstorm, setCdYellowstorm] = useState(0);
+  const volume = useSelector(userSelectors.getVolume);
+  const [playSkillSound] = useSound(skillSound, { volume });
 
-  // const shop = useSelector(shopSelectors.getShop);
+  const { data: user } = useGetCurrentUserQuery();
+  const [updateUser] = useUpdateUserMutation();
+
   const pinkPoints = useSelector(pointsSelectors.getPinkPoints);
   const bluePoints = useSelector(pointsSelectors.getBluePoints);
   const yellowPoints = useSelector(pointsSelectors.getYellowPoints);
@@ -77,9 +76,9 @@ const Field = ({ addsPoint, addsTime, isNewGame, time }) => {
       clearInterval(createPinkPointIntervalId.current);
       clearInterval(createBluePointIntervalId.current);
       clearInterval(createYellowPointIntervalId.current);
-      // setCdPinkstorm(0);
-      // setCdBluestorm(0);
-      // setCdYellowstorm(0);
+      setCdPinkstorm(0);
+      setCdBluestorm(0);
+      setCdYellowstorm(0);
       dispatch(clearAllPoints());
     }
   }, [time]);
@@ -127,68 +126,74 @@ const Field = ({ addsPoint, addsTime, isNewGame, time }) => {
     }, getRandomNumber(maxDelay, minDelay));
   };
 
-  const activatePinkstormSkill = () => {
-    // if (shop.pinkstorm.amount > 0) {
-    //   // playSkillSound();
-    //   dispatch(deletePinkstorm());
-    //   setCdPinkstorm(30);
-    //   startsCooldown(setCdPinkstorm);
-    //   for (let i = 0; i < 30; i++) {
-    //     setTimeout(() => {
-    //       const id = nanoid();
-    //       const newPoint = createPoint(id, width, height);
-    //       dispatch(createPinkPoint(newPoint));
-    //       deletePointLaterSomeTime(dispatch, deletePinkPoint, id, 10000);
-    //     }, getRandomNumber(1100));
-    //   }
-    // }
+  const activatePinkstormSkill = async () => {
+    if (user?.skills.pinkstorm > 0) {
+      playSkillSound();
+      await updateUser({
+        skills: { ...user.skills, pinkstorm: user.skills.pinkstorm - 1 },
+      });
+      setCdPinkstorm(30);
+      startsCooldown(setCdPinkstorm);
+      for (let i = 0; i < 30; i++) {
+        setTimeout(() => {
+          const id = nanoid();
+          const newPoint = createPoint(id, width, height);
+          dispatch(createPinkPoint(newPoint));
+          deletePointLaterSomeTime(dispatch, deletePinkPoint, id, 10000);
+        }, getRandomNumber(1100));
+      }
+    }
   };
 
-  const activateBluestormSkill = () => {
-    // if (shop.bluestorm.amount > 0) {
-    //   // playSkillSound();
-    //   dispatch(deleteBluestorm());
-    //   setCdBluestorm(30);
-    //   startsCooldown(setCdBluestorm);
-    //   for (let i = 0; i < 30; i++) {
-    //     setTimeout(() => {
-    //       const id = nanoid();
-    //       const newPoint = createPoint(id, width, height);
-    //       dispatch(createBluePoint(newPoint));
-    //       deletePointLaterSomeTime(dispatch, deleteBluePoint, id, 10000);
-    //     }, getRandomNumber(1100));
-    //   }
-    // }
+  const activateBluestormSkill = async () => {
+    if (user?.skills.bluestorm > 0) {
+      playSkillSound();
+      await updateUser({
+        skills: { ...user.skills, bluestorm: user.skills.bluestorm - 1 },
+      });
+      setCdBluestorm(30);
+      startsCooldown(setCdBluestorm);
+      for (let i = 0; i < 30; i++) {
+        setTimeout(() => {
+          const id = nanoid();
+          const newPoint = createPoint(id, width, height);
+          dispatch(createBluePoint(newPoint));
+          deletePointLaterSomeTime(dispatch, deleteBluePoint, id, 10000);
+        }, getRandomNumber(1100));
+      }
+    }
   };
 
-  const activateYellowstormSkill = () => {
-    // if (shop.yellowstorm.amount > 0) {
-    //   // playSkillSound();
-    //   dispatch(deleteYellowstorm());
-    //   setCdYellowstorm(30);
-    //   startsCooldown(setCdYellowstorm);
-    //   for (let i = 0; i < 30; i++) {
-    //     setTimeout(() => {
-    //       const id = nanoid();
-    //       const newPoint = createPoint(id, width, height);
-    //       dispatch(createYellowPoint(newPoint));
-    //       deletePointLaterSomeTime(dispatch, deleteYellowPoint, id, 10000);
-    //     }, getRandomNumber(1100));
-    //   }
-    // }
+  const activateYellowstormSkill = async () => {
+    if (user?.skills.yellowstorm > 0) {
+      playSkillSound();
+      await updateUser({
+        skills: { ...user.skills, yellowstorm: user.skills.yellowstorm - 1 },
+      });
+      setCdYellowstorm(30);
+      startsCooldown(setCdYellowstorm);
+      for (let i = 0; i < 30; i++) {
+        setTimeout(() => {
+          const id = nanoid();
+          const newPoint = createPoint(id, width, height);
+          dispatch(createYellowPoint(newPoint));
+          deletePointLaterSomeTime(dispatch, deleteYellowPoint, id, 10000);
+        }, getRandomNumber(1100));
+      }
+    }
   };
 
   return (
     <WrapperFieldGame>
-      {/* <Skills
-        shop={shop}
+      <Skills
+        user={user}
         cdPinkstorm={cdPinkstorm}
         cdBluestorm={cdBluestorm}
         cdYellowstorm={cdYellowstorm}
         activatePinkstormSkill={activatePinkstormSkill}
         activateBluestormSkill={activateBluestormSkill}
         activateYellowstormSkill={activateYellowstormSkill}
-      /> */}
+      />
       <FieldGame ref={fieldComponent}>
         {pinkPoints?.map(({ id, x, y, size }) => (
           <PinkPoint
