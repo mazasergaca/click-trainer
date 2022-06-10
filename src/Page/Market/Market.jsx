@@ -1,6 +1,5 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { PulseLoader } from "react-spinners";
 import userSelectors from "../../redux/user/user-selectors";
 import shopSelectors from "../../redux/shop/shop-selectors";
 import {
@@ -22,6 +21,7 @@ import {
   WrapperPrice,
   WrapperName,
   WrapperAmount,
+  Title,
 } from "./Market.styles";
 
 const Market = () => {
@@ -83,6 +83,7 @@ const Market = () => {
         <LinkStyled to="/menu" onClick={playSound}>
           ᐊ
         </LinkStyled>
+        <Title>Market</Title>
         <Item>
           <WrapperName>
             <svg fill="rgb(234, 72, 132)" width={40} height={40}>
