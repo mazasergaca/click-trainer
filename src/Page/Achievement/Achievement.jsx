@@ -2,8 +2,11 @@ import React from "react";
 import useSound from "use-sound";
 import { MdDone } from "react-icons/md";
 import { BiMedal } from "react-icons/bi";
-import { useSelector, useDispatch } from "react-redux";
-import { useGetCurrentUserQuery } from "../../redux/base-api";
+import { useSelector } from "react-redux";
+import {
+  useGetCurrentUserQuery,
+  useUpdateUserMutation,
+} from "../../redux/base-api";
 import userSelectors from "../../redux/user/user-selectors";
 import { getAchievementPointsInPescent } from "../../utils/getAchievementPointsInPercent";
 import { getCurrentLevelAchievement } from "../../utils/getCurrentLevelAchievement";
@@ -31,25 +34,37 @@ const Achievement = () => {
 
   const allAchievements = useSelector(userSelectors.getAllAchievements);
 
+  const [updateUser, { isLoading: isLoadingUpdate }] = useUpdateUserMutation();
   const { data: user, isLoading } = useGetCurrentUserQuery();
-
-  const dispatch = useDispatch();
 
   const achievementPointsInPercent = getAchievementPointsInPescent(
     allAchievements,
     user?.achievementPoints
   );
 
-  const handleClickAchievement = (levels, indexType) => {
+  const handleClickAchievement = async (levels, indexType) => {
     playAchievementSound();
-    // const points = levels[getCurrentLevelAchievement(levels)].points;
-    // dispatch(
-    //   changeReseived({
-    //     indexType,
-    //     indexLevel: getCurrentLevelAchievement(levels),
-    //   })
-    // );
-    // dispatch(incrementAchievementPoints(points));
+    const points = levels[getCurrentLevelAchievement(levels)].points;
+    const initLevels = [...levels];
+
+    initLevels[getCurrentLevelAchievement(levels)] = {
+      ...levels[getCurrentLevelAchievement(levels)],
+      reseived: true,
+    };
+
+    const name =
+      indexType === 0
+        ? "totalGames"
+        : indexType === 1
+        ? "totalCoins"
+        : "recordScore";
+    await updateUser({
+      achievementPoints: user.achievementPoints + points,
+      achievements: {
+        ...user.achievements,
+        [name]: { ...user.achievements[name], levels: initLevels },
+      },
+    });
   };
 
   return (
@@ -91,8 +106,9 @@ const Achievement = () => {
                       }
                       disabled={
                         achive.value <
-                        achive.levels[getCurrentLevelAchievement(achive.levels)]
-                          .value
+                          achive.levels[
+                            getCurrentLevelAchievement(achive.levels)
+                          ].value || isLoadingUpdate
                       }
                     >
                       {
