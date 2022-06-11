@@ -1,5 +1,5 @@
 <h1 align="center">Clickstorm</h1>
-<h2 align="center"><a  href="https://mazasergaca.github.io/clickstorm/">Live Version</a></h2>
+<h2 align="center"><a  href="https://clickstorm.netlify.app/">Live Version</a></h2>
 
 ## Description
 Clickstorm is a retro game. Implemented in React (Redux Toolkit). This is the starting version, all updates will be described here.
