@@ -18,7 +18,7 @@ const Header = ({ time, score }) => {
     <Container>
       <WrapperRecord>
         <Item>My record:</Item>
-        <Item>0</Item>
+        <Item>{user?.achievements.recordScore.value}</Item>
       </WrapperRecord>
       <Time>{time}</Time>
       <Wrapper>

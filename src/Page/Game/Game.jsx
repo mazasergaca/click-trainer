@@ -45,7 +45,26 @@ const Game = () => {
   useEffect(() => {
     if (time === 0) {
       clearInterval(timerIntervalId.current);
-      updateUser({ coins: user.coins + score });
+      updateUser({
+        coins: user.coins + score,
+        achievements: {
+          totalGames: {
+            ...user.achievements.totalGames,
+            value: user.achievements.totalGames.value + 1,
+          },
+          totalCoins: {
+            ...user.achievements.totalCoins,
+            value: user.achievements.totalCoins.value + score,
+          },
+          recordScore: {
+            ...user.achievements.recordScore,
+            value:
+              user.achievements.recordScore.value >= score
+                ? user.achievements.recordScore.value
+                : score,
+          },
+        },
+      });
       // if (bestResult < score) {
       //changes record
       // }
