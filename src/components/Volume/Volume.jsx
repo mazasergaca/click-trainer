@@ -1,17 +1,11 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import userSelectors from "../../redux/user/user-selectors";
 import { changeVolume } from "../../redux/user/user-slice";
 import { FaVolumeUp, FaVolumeMute, FaVolumeDown } from "react-icons/fa";
-import { Wrapper, WrapperVolume, Input, Backdrop } from "./Volume.style";
+import { Wrapper, WrapperVolume, Input } from "./Volume.style";
 
 const Volume = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const open = () => setIsOpen(true);
-  const close = () => {
-    setIsOpen(false);
-  };
-
   const dispatch = useDispatch();
   const volume = useSelector(userSelectors.getVolume);
 
@@ -33,7 +27,7 @@ const Volume = () => {
   return (
     <>
       <Wrapper>
-        <WrapperVolume onMouseEnter={open} onMouseLeave={close}>
+        <WrapperVolume>
           {volume === 0 ? (
             <FaVolumeMute size={24} onClick={handleClick} />
           ) : volume < 0.5 ? (
@@ -41,24 +35,16 @@ const Volume = () => {
           ) : (
             <FaVolumeUp size={24} onClick={handleClick} />
           )}
-          {isOpen && (
-            <Input
-              value={volume}
-              type="range"
-              min={0}
-              max={1}
-              step={0.01}
-              onChange={handleChange}
-            />
-          )}
+          <Input
+            value={volume}
+            type="range"
+            min={0}
+            max={1}
+            step={0.01}
+            onChange={handleChange}
+          />
         </WrapperVolume>
       </Wrapper>
-      <Backdrop
-        onClick={() => {
-          console.log(1);
-          close();
-        }}
-      ></Backdrop>
     </>
   );
 };

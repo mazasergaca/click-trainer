@@ -11,6 +11,7 @@ const Menu = lazy(() => import("../../Page/Menu"));
 const Game = lazy(() => import("../../Page/Game"));
 const Market = lazy(() => import("../../Page/Market"));
 const Achievement = lazy(() => import("../../Page/Achievement"));
+const Settings = lazy(() => import("../../Page/Settings"));
 
 const RoutesComponent = () => {
   return (
@@ -69,6 +70,14 @@ const RoutesComponent = () => {
           element={
             <PrivateRoute>
               <Achievement />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/settings"
+          element={
+            <PrivateRoute>
+              <Settings />
             </PrivateRoute>
           }
         />

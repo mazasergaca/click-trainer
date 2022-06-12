@@ -22,6 +22,8 @@ import {
   WrapperName,
   WrapperAmount,
   Title,
+  CoinImage,
+  WrapperHeader,
 } from "./Market.styles";
 
 const Market = () => {
@@ -80,9 +82,15 @@ const Market = () => {
   return (
     <Container>
       <Wrapper>
-        <LinkStyled to="/menu" onClick={playSound}>
-          ᐊ
-        </LinkStyled>
+        <WrapperHeader>
+          <LinkStyled to="/menu" onClick={playSound}>
+            ᐊ
+          </LinkStyled>
+          <WrapperPrice>
+            {user?.coins}
+            <CoinImage src={coin} alt="coin" />
+          </WrapperPrice>
+        </WrapperHeader>
         <Title>Market</Title>
         <Item>
           <WrapperName>

@@ -4,7 +4,6 @@ import RoutesComponent from "./components/Routes/Routes";
 import { useFetchCurrentUserMutation } from "./redux/base-api";
 import userSelectors from "./redux/user/user-selectors";
 import { GLobalStyles } from "./styles/global";
-import Volume from "./components/Volume/Volume";
 
 const App = () => {
   const token = useSelector(userSelectors.getToken);
@@ -13,14 +12,13 @@ const App = () => {
   useEffect(() => {
     if (token) {
       fetchCurrentUser();
-    }
+    } //eslint-disable-next-line
   }, [token]);
 
   return (
     <>
       <GLobalStyles />
       <RoutesComponent />
-      <Volume />
     </>
   );
 };
