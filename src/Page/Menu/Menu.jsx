@@ -31,6 +31,7 @@ const Menu = () => {
         <Button onClick={() => handleClick("/game")}>New game</Button>
         <Button onClick={() => handleClick("/market")}>Market</Button>
         <Button onClick={() => handleClick("/achievement")}>Achievement</Button>
+        <Button onClick={() => handleClick("/Settings")}>Settings</Button>
         <Button onClick={onClickLogout}>Logout</Button>
       </Wrapper>
     </Container>

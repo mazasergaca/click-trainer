@@ -18,11 +18,14 @@ export const Title = styled.h1`
   text-align: center;
 `;
 
-export const LinkStyled = styled(Link)`
-  position: absolute;
-  left: 20px;
-  top: -70px;
+export const WrapperHeader = styled.div`
+  padding: 0 35px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
 
+export const LinkStyled = styled(Link)`
   font-family: "Press Start 2P", cursive;
   font-size: 32px;
 
@@ -87,6 +90,7 @@ export const WrapperName = styled.div`
 export const WrapperPrice = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
 `;
 
 export const WrapperAmount = styled.div`
@@ -96,4 +100,14 @@ export const WrapperAmount = styled.div`
 
 export const Text = styled.span`
   font-size: 16px;
+`;
+
+export const CoinImage = styled.img`
+  width: 20px;
+  @media screen and (min-width: 768px) {
+    width: 28px;
+  }
+  @media screen and (min-width: 1280px) {
+    width: 30px;
+  }
 `;
