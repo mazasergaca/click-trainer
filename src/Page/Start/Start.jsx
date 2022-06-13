@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import useSound from "use-sound";
 import userSelectors from "../../redux/user/user-selectors";
 import pressSound from "../../assets/sounds/start.mp3";
+import Loader from "../../components/Loader/Loader";
 import { Backdrop, Wrapper, LinkStyled, Text } from "./Start.styles";
 
 const StartPage = () => {
@@ -18,7 +19,7 @@ const StartPage = () => {
 
   return (
     <Backdrop>
-      {!isFetchingCurrentUser && (
+      {!isFetchingCurrentUser ? (
         <Wrapper>
           {token ? (
             <>
@@ -38,6 +39,8 @@ const StartPage = () => {
             </>
           )}
         </Wrapper>
+      ) : (
+        <Loader />
       )}
     </Backdrop>
   );

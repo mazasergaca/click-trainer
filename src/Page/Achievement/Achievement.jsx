@@ -12,6 +12,7 @@ import { getAchievementPointsInPescent } from "../../utils/getAchievementPointsI
 import { getCurrentLevelAchievement } from "../../utils/getCurrentLevelAchievement";
 import AchievementSound from "../../assets/sounds/achievement.mp3";
 import pressSound from "../../assets/sounds/start.mp3";
+import Loader from "../../components/Loader/Loader";
 import Container from "../../components/Container/Container";
 import {
   Button,
@@ -68,65 +69,70 @@ const Achievement = () => {
   };
 
   return (
-    <Container>
-      {!isLoading && (
-        <Wrapper>
-          <LinkStyled to="/menu" onClick={playSound}>
-            ᐊ
-          </LinkStyled>
-          <Title>Achievement</Title>
-          <Scale points={achievementPointsInPercent}>
-            <MainScore>
-              {user?.achievementPoints} / {allAchievements}(
-              {achievementPointsInPercent})
-            </MainScore>
-          </Scale>
-          <List>
-            {Object.values(user.achievements).map((achive, index) => (
-              <Item key={achive.name}>
-                <Name>{achive.name}</Name>
-                <WrapperItems>
-                  <Score>
-                    {achive.value}
-                    {getCurrentLevelAchievement(achive.levels) !== null && (
-                      <>
-                        /
+    <>
+      {!isLoading ? (
+        <Container>
+          <Wrapper>
+            <LinkStyled to="/menu" onClick={playSound}>
+              ᐊ
+            </LinkStyled>
+            <Title>Achievement</Title>
+            <Scale points={achievementPointsInPercent}>
+              <MainScore>
+                {user?.achievementPoints} / {allAchievements}(
+                {achievementPointsInPercent})
+              </MainScore>
+            </Scale>
+            <List>
+              {Object.values(user.achievements).map((achive, index) => (
+                <Item key={achive.name}>
+                  <Name>{achive.name}</Name>
+                  <WrapperItems>
+                    <Score>
+                      {achive.value}
+                      {getCurrentLevelAchievement(achive.levels) !== null && (
+                        <>
+                          /
+                          {
+                            achive.levels[
+                              getCurrentLevelAchievement(achive.levels)
+                            ].value
+                          }
+                        </>
+                      )}
+                    </Score>
+                    {getCurrentLevelAchievement(achive.levels) !== null ? (
+                      <Button
+                        onClick={() =>
+                          handleClickAchievement(achive.levels, index)
+                        }
+                        disabled={
+                          achive.value <
+                            achive.levels[
+                              getCurrentLevelAchievement(achive.levels)
+                            ].value || isLoadingUpdate
+                        }
+                      >
                         {
                           achive.levels[
                             getCurrentLevelAchievement(achive.levels)
-                          ].value
+                          ].points
                         }
-                      </>
+                        <BiMedal size={24} />
+                      </Button>
+                    ) : (
+                      <MdDone size={24} color="#70fa7a" />
                     )}
-                  </Score>
-                  {getCurrentLevelAchievement(achive.levels) !== null ? (
-                    <Button
-                      onClick={() =>
-                        handleClickAchievement(achive.levels, index)
-                      }
-                      disabled={
-                        achive.value <
-                          achive.levels[
-                            getCurrentLevelAchievement(achive.levels)
-                          ].value || isLoadingUpdate
-                      }
-                    >
-                      {
-                        achive.levels[getCurrentLevelAchievement(achive.levels)]
-                          .points
-                      }
-                      <BiMedal size={24} />
-                    </Button>
-                  ) : (
-                    <MdDone size={24} color="#70fa7a" />
-                  )}
-                </WrapperItems>
-              </Item>
-            ))}
-          </List>
-        </Wrapper>
+                  </WrapperItems>
+                </Item>
+              ))}
+            </List>
+          </Wrapper>
+        </Container>
+      ) : (
+        <Loader />
       )}
-    </Container>
+    </>
   );
 };
 

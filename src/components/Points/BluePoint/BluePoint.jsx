@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import userSelectors from "../../redux/user/user-selectors";
+import userSelectors from "../../../redux/user/user-selectors";
 import useSound from "use-sound";
-import { deleteBluePoint } from "../../redux/points/points-slice";
-import bubbleSound from "../../assets/sounds/bubble-blue.mp3";
+import { deleteBluePoint } from "../../../redux/points/points-slice";
+import bubbleSound from "../../../assets/sounds/bubble-blue.mp3";
 import { Point } from "./BluePoint.styles";
 
 const PointBlue = ({ addsPoint, id, x, y, size: sizeProps }) => {

@@ -23,9 +23,9 @@ import { getRandomNumber } from "../../utils/getRandomNumber";
 import { startsCooldown } from "../../utils/startsCooldown";
 import skillSound from "../../assets/sounds/skill.mp3";
 import Skills from "../Skills/Skills";
-import BluePoint from "../BluePoint";
-import PinkPoint from "../PinkPoint/PinkPoint";
-import YellowPoint from "../YellowPoint/YellowPoint";
+import BluePoint from "../Points/BluePoint";
+import PinkPoint from "../Points/PinkPoint";
+import YellowPoint from "../Points/YellowPoint";
 import { FieldGame, WrapperFieldGame } from "./Field.styles";
 
 const Field = ({ addsPoint, addsTime, isNewGame, time }) => {
@@ -57,7 +57,7 @@ const Field = ({ addsPoint, addsTime, isNewGame, time }) => {
       clearInterval(createPinkPointIntervalId.current);
       clearInterval(createBluePointIntervalId.current);
       clearInterval(createYellowPointIntervalId.current);
-    };
+    }; // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -80,7 +80,7 @@ const Field = ({ addsPoint, addsTime, isNewGame, time }) => {
       setCdBluestorm(0);
       setCdYellowstorm(0);
       dispatch(clearAllPoints());
-    }
+    } // eslint-disable-next-line
   }, [time]);
 
   useEffect(() => {

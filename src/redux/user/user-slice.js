@@ -16,8 +16,14 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    resetToken(state) {
+    logout(state) {
+      state.username = null;
       state.token = null;
+      state.achievementPoints = {
+        all: 0,
+      };
+      state.isLoggedIn = false;
+      state.isFetchingCurrentUser = false;
     },
     changeVolume(state, action) {
       state.volume = action.payload;
@@ -29,14 +35,6 @@ const userSlice = createSlice({
       (state, action) => {
         state.token = action.payload.token;
         state.isLoggedIn = true;
-      }
-    );
-    builder.addMatcher(
-      baseApi.endpoints.registration.matchFulfilled,
-      (state, action) => {
-        // state.user = action.payload.user;
-        // state.token = action.payload.token;
-        // state.isLoggedIn = true;
       }
     );
     builder.addMatcher(
@@ -68,28 +66,9 @@ const userSlice = createSlice({
         state.isFetchingCurrentUser = false;
       }
     );
-    builder.addMatcher(
-      baseApi.endpoints.getCurrentUser.matchPending,
-      (state) => {
-        state.isFetchingCurrentUser = true;
-      }
-    );
-    builder.addMatcher(
-      baseApi.endpoints.getCurrentUser.matchFulfilled,
-      (state) => {
-        state.isLoggedIn = true;
-        state.isFetchingCurrentUser = false;
-      }
-    );
-    builder.addMatcher(
-      baseApi.endpoints.getCurrentUser.matchRejected,
-      (state) => {
-        state.isFetchingCurrentUser = false;
-      }
-    );
   },
 });
 
-export const { resetToken, changeVolume } = userSlice.actions;
+export const { logout, changeVolume } = userSlice.actions;
 
 export default userSlice.reducer;

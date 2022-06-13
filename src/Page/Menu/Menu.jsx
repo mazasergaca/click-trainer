@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import useSound from "use-sound";
 import { useDispatch, useSelector } from "react-redux";
-import { resetToken } from "../../redux/user/user-slice";
+import { logout } from "../../redux/user/user-slice";
 import userSelectors from "../../redux/user/user-selectors";
 import pressSound from "../../assets/sounds/start.mp3";
 import Container from "../../components/Container/Container";
@@ -23,7 +23,7 @@ const Menu = () => {
 
   const onClickLogout = () => {
     playSound();
-    dispatch(resetToken());
+    dispatch(logout());
   };
   return (
     <Container>
