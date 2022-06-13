@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
 import useSound from "use-sound";
 import { useDispatch, useSelector } from "react-redux";
@@ -26,15 +27,22 @@ const Menu = () => {
     dispatch(logout());
   };
   return (
-    <Container>
-      <Wrapper>
-        <Button onClick={() => handleClick("/game")}>New game</Button>
-        <Button onClick={() => handleClick("/market")}>Market</Button>
-        <Button onClick={() => handleClick("/achievement")}>Achievement</Button>
-        <Button onClick={() => handleClick("/Settings")}>Settings</Button>
-        <Button onClick={onClickLogout}>Logout</Button>
-      </Wrapper>
-    </Container>
+    <>
+      <Helmet>
+        <title>Clickstorm | Menu</title>
+      </Helmet>
+      <Container>
+        <Wrapper>
+          <Button onClick={() => handleClick("/game")}>New game</Button>
+          <Button onClick={() => handleClick("/market")}>Market</Button>
+          <Button onClick={() => handleClick("/achievement")}>
+            Achievement
+          </Button>
+          <Button onClick={() => handleClick("/Settings")}>Settings</Button>
+          <Button onClick={onClickLogout}>Logout</Button>
+        </Wrapper>
+      </Container>
+    </>
   );
 };
 

@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import useSound from "use-sound";
 import { MdDone } from "react-icons/md";
 import { BiMedal } from "react-icons/bi";
@@ -70,6 +71,9 @@ const Achievement = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Clickstorm | Achievement</title>
+      </Helmet>
       {!isLoading ? (
         <Container>
           <Wrapper>

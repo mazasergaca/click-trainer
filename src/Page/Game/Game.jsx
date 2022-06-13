@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { Helmet } from "react-helmet";
 import { useSelector } from "react-redux";
 import useSound from "use-sound";
 import userSelectors from "../../redux/user/user-selectors";
@@ -97,6 +98,9 @@ const Game = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Clickstorm | Game</title>
+      </Helmet>
       <Container>
         <Header time={time} score={score} />
         <Field

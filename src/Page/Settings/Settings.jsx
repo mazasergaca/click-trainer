@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import { useSelector } from "react-redux/es/exports";
 import useSound from "use-sound";
 import pressSound from "../../assets/sounds/start.mp3";
@@ -11,17 +12,22 @@ const Settings = () => {
   const volume = useSelector(userSelectors.getVolume);
   const [playSound] = useSound(pressSound, { volume });
   return (
-    <Container>
-      <Wrapper>
-        <LinkStyled to="/menu" onClick={playSound}>
-          ᐊ
-        </LinkStyled>
-        <Item>
-          <Name>Volume</Name>
-          <Volume />
-        </Item>
-      </Wrapper>
-    </Container>
+    <>
+      <Helmet>
+        <title>Clickstorm | Settings</title>
+      </Helmet>
+      <Container>
+        <Wrapper>
+          <LinkStyled to="/menu" onClick={playSound}>
+            ᐊ
+          </LinkStyled>
+          <Item>
+            <Name>Volume</Name>
+            <Volume />
+          </Item>
+        </Wrapper>
+      </Container>
+    </>
   );
 };
 
