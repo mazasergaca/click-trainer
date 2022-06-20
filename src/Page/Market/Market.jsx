@@ -9,7 +9,7 @@ import {
 } from "../../redux/base-api";
 import useSound from "use-sound";
 import sprite from "../../assets/images/sprite.svg";
-import coin from "../../assets/images/coin.svg";
+import { GiTwoCoins } from "react-icons/gi";
 import buySound from "../../assets/sounds/buy.mp3";
 import pressSound from "../../assets/sounds/start.mp3";
 import Container from "../../components/Container/Container";
@@ -23,8 +23,8 @@ import {
   WrapperName,
   WrapperAmount,
   Title,
-  CoinImage,
   WrapperHeader,
+  Price,
 } from "./Market.styles";
 
 const Market = () => {
@@ -92,8 +92,8 @@ const Market = () => {
               ᐊ
             </LinkStyled>
             <WrapperPrice>
-              {user?.coins}
-              <CoinImage src={coin} alt="coin" />
+              <Price>{user?.coins}</Price>
+              <GiTwoCoins size={32} color="#ffdf44" />
             </WrapperPrice>
           </WrapperHeader>
           <Title>Market</Title>
@@ -105,8 +105,8 @@ const Market = () => {
               Pinkstorm
             </WrapperName>
             <WrapperPrice>
-              {shop.pinkstorm.price}
-              <img src={coin} alt="coin" width="30px" />
+              <Price>{shop.pinkstorm.price}</Price>
+              <GiTwoCoins size={32} color="#ffdf44" />
             </WrapperPrice>
             <WrapperAmount>
               <Text>{user?.skills.pinkstorm}</Text>
@@ -129,8 +129,8 @@ const Market = () => {
               Bluestorm
             </WrapperName>
             <WrapperPrice>
-              {shop.bluestorm.price}
-              <img src={coin} alt="coin" width="30px" />
+              <Price>{shop.bluestorm.price}</Price>
+              <GiTwoCoins size={32} color="#ffdf44" />
             </WrapperPrice>
             <WrapperAmount>
               <Text>{user?.skills.bluestorm}</Text>
@@ -153,8 +153,8 @@ const Market = () => {
               Yellowstorm
             </WrapperName>
             <WrapperPrice>
-              {shop.yellowstorm.price}
-              <img src={coin} alt="coin" width="30px" />
+              <Price>{shop.yellowstorm.price}</Price>
+              <GiTwoCoins size={32} color="#ffdf44" />
             </WrapperPrice>
             <WrapperAmount>
               <Text>{user?.skills.yellowstorm}</Text>

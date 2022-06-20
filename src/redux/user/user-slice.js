@@ -10,6 +10,7 @@ const initialState = {
   isLoggedIn: false,
   isFetchingCurrentUser: false,
   volume: 0.3,
+  error: null,
 };
 
 const userSlice = createSlice({
@@ -28,6 +29,9 @@ const userSlice = createSlice({
     changeVolume(state, action) {
       state.volume = action.payload;
     },
+    resetError(state) {
+      state.error = null;
+    },
   },
   extraReducers: (builder) => {
     builder.addMatcher(
@@ -35,6 +39,18 @@ const userSlice = createSlice({
       (state, action) => {
         state.token = action.payload.token;
         state.isLoggedIn = true;
+      }
+    );
+    builder.addMatcher(
+      baseApi.endpoints.login.matchRejected,
+      (state, action) => {
+        state.error = action.payload.data.message;
+      }
+    );
+    builder.addMatcher(
+      baseApi.endpoints.registration.matchRejected,
+      (state, action) => {
+        state.error = action.payload.data.message;
       }
     );
     builder.addMatcher(
@@ -69,6 +85,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { logout, changeVolume } = userSlice.actions;
+export const { logout, changeVolume, resetError } = userSlice.actions;
 
 export default userSlice.reducer;

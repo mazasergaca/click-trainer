@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
 export const Wrapper = styled.ul`
   position: absolute;
@@ -12,16 +11,18 @@ export const Wrapper = styled.ul`
 `;
 
 export const Button = styled.button`
-  padding: 13px 35px;
+  padding: 13px 75px;
 
-  font-family: "Press Start 2P", cursive;
-  font-size: 20px;
+  font-family: inherit;
+  font-size: 22px;
   text-align: center;
 
-  border-radius: 20px;
-  border: 1px solid #fff;
+  border-radius: 30px;
+  border: 2px solid #fff;
   background: transparent;
   color: #fff;
+  text-shadow: 1px 1px 1px #000;
+  box-shadow: 0px 2px 0px #000;
   cursor: pointer;
 
   transition: border-color 0.25s;
@@ -32,5 +33,9 @@ export const Button = styled.button`
 
   &:not(:last-child) {
     margin-bottom: 20px;
+  }
+
+  @media screen and (min-width: 768px) {
+    font-size: 26px;
   }
 `;

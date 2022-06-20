@@ -18,13 +18,13 @@ export const LinkStyled = styled(Link)`
   left: 20px;
   top: -70px;
 
-  font-family: "Press Start 2P", cursive;
   font-size: 32px;
 
   border-radius: 20px;
   background: transparent;
   color: #fff;
   cursor: pointer;
+  text-shadow: 1px 1px 1px #000;
 
   transition: color 0.25s;
 
@@ -40,9 +40,20 @@ export const Item = styled.div`
 `;
 
 export const Name = styled.span`
-  font-size: 20px;
+  font-size: 26px;
+
+  text-shadow: 1px 1px 1px #000;
 
   @media screen and (min-width: 768px) {
-    font-size: 26px;
+    font-size: 32px;
   }
+`;
+
+export const Title = styled.h1`
+  margin-bottom: 15px;
+  text-align: center;
+
+  font-size: 36px;
+
+  text-shadow: 1px 1px 1px #000;
 `;

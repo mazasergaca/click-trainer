@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import backgroundImage from "../assets/images/background.png";
 
 export const GLobalStyles = createGlobalStyle`
  * {
@@ -12,8 +13,10 @@ export const GLobalStyles = createGlobalStyle`
   body {
     font-size: 12px;
     line-height: 1.33;
-    font-family: 'Press Start 2P', cursive;
+    font-family: 'Secular One', sans-serif;
+   /* background: linear-gradient(90deg, #faf0cd, #fab397); */
    background-color: #000;
+   background-image: url(${backgroundImage});
     color: #fff;
   
   }

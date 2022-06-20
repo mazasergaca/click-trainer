@@ -1,6 +1,6 @@
 import React from "react";
 import { useGetCurrentUserQuery } from "../../redux/base-api";
-import coin from "../../assets/images/coin.svg";
+import { GiTwoCoins } from "react-icons/gi";
 import {
   Container,
   Wrapper,
@@ -8,7 +8,7 @@ import {
   WrapperItems,
   Item,
   Time,
-  CoinImage,
+  Coins,
 } from "./Header.styles";
 
 const Header = ({ time, score }) => {
@@ -17,16 +17,16 @@ const Header = ({ time, score }) => {
   return (
     <Container>
       <WrapperRecord>
-        <Item>My record:</Item>
+        <Item>My record: </Item>
         <Item>{user?.achievements.recordScore.value}</Item>
       </WrapperRecord>
       <Time>{time}</Time>
       <Wrapper>
         <WrapperItems>
-          <Item>Coins: {user?.coins}</Item>
-          <CoinImage src={coin} alt="coin" />
+          <Coins>{user?.coins}</Coins>
+          <GiTwoCoins size={32} color="#ffdf44" />
         </WrapperItems>
-        <WrapperItems>Score:{score}</WrapperItems>
+        <WrapperItems>Score: {score}</WrapperItems>
       </Wrapper>
     </Container>
   );

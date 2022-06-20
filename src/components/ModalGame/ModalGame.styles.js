@@ -43,25 +43,36 @@ export const MenuNav = styled.div`
 `;
 
 export const ItemMenu = styled.span`
-  margin-bottom: 20px;
-  font-size: 18px;
+  font-size: 36px;
   text-align: center;
 
+  text-shadow: 1px 1px 1px #000;
+
+  &:not(:last-of-type) {
+    margin-bottom: 10px;
+  }
+
+  &:last-of-type {
+    margin-bottom: 35px;
+  }
+
   @media screen and (min-width: 768px) {
-    font-size: 26px;
+    font-size: 42px;
   }
 `;
 
 export const ButtonMenu = styled.button`
   padding: 13px 35px;
 
-  font-family: "Press Start 2P", cursive;
-  font-size: 16px;
+  font-family: inherit;
+  font-size: 22px;
 
-  border-radius: 20px;
-  border: 1px solid #fff;
+  border-radius: 30px;
+  border: 2px solid #fff;
   background: transparent;
   color: #fff;
+  text-shadow: 1px 1px 1px #000;
+  box-shadow: 0px 2px 0px #000;
   cursor: pointer;
 
   transition: border-color 0.25s;

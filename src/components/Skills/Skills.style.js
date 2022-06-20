@@ -31,7 +31,9 @@ export const Item = styled.div`
 
 export const Text = styled.span`
   margin-left: 10px;
-  font-size: 16px;
+  font-size: 20px;
+
+  text-shadow: 1px 1px 1px #000;
 `;
 
 export const Button = styled.button`
@@ -44,9 +46,10 @@ export const Button = styled.button`
   justify-content: center;
 
   overflow: hidden;
-  border: 1px solid #fff;
+  border: 2px solid #fff;
   border-radius: 50%;
   background-color: transparent;
+  box-shadow: 0px 2px 0px #000;
   cursor: pointer;
 
   &:hover {

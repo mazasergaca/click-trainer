@@ -19,15 +19,16 @@ export const Wrapper = styled.div`
 `;
 
 export const LinkStyled = styled(Link)`
-  padding: 13px 35px;
+  padding: 10px 45px;
 
-  font-family: "Press Start 2P", cursive;
-  font-size: 20px;
+  font-size: 28px;
 
-  border-radius: 20px;
-  border: 1px solid #fff;
+  border-radius: 30px;
+  border: 2px solid #fff;
   background: transparent;
   color: #fff;
+  text-shadow: 1px 1px 1px #000;
+  box-shadow: 0px 2px 0px #000;
   cursor: pointer;
 
   transition: border-color 0.25s;
@@ -44,10 +45,13 @@ export const LinkStyled = styled(Link)`
 export const Text = styled.span`
   margin-bottom: 15px;
 
-  font-size: 16px;
+  font-size: 28px;
   text-align: center;
 
+  color: #fff;
+  text-shadow: 1px 1px 1px #000;
+
   @media screen and (min-width: 768px) {
-    font-size: 22px;
+    font-size: 38px;
   }
 `;

@@ -79,6 +79,7 @@ const Form = ({ title, typeSubmit }) => {
             name="username"
             value={username}
             onChange={handleChange}
+            required
           />
         </Label>
         <Label>
@@ -88,11 +89,16 @@ const Form = ({ title, typeSubmit }) => {
             name="password"
             value={password}
             onChange={handleChange}
+            required
           />
         </Label>
         <Button type="submit">
           {!isLoadingLogin && !isLoadingRegistration ? (
-            "Go"
+            typeSubmit === "login" ? (
+              "Log In"
+            ) : (
+              "Create account"
+            )
           ) : (
             <PulseLoader color="#fff" />
           )}

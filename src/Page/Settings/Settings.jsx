@@ -6,7 +6,7 @@ import pressSound from "../../assets/sounds/start.mp3";
 import Container from "../../components/Container/Container";
 import userSelectors from "../../redux/user/user-selectors";
 import Volume from "../../components/Volume/Volume";
-import { LinkStyled, Wrapper, Item, Name } from "./Settings.style";
+import { LinkStyled, Wrapper, Item, Name, Title } from "./Settings.style";
 
 const Settings = () => {
   const volume = useSelector(userSelectors.getVolume);
@@ -21,6 +21,7 @@ const Settings = () => {
           <LinkStyled to="/menu" onClick={playSound}>
             ᐊ
           </LinkStyled>
+          <Title>Settings</Title>
           <Item>
             <Name>Volume</Name>
             <Volume />

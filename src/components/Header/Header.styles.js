@@ -9,12 +9,13 @@ export const Container = styled.div`
   display: flex;
   justify-content: space-between;
 
-  font-size: 12px;
+  font-size: 22px;
+
   border-bottom: 1px solid #fff;
+  text-shadow: 1px 1px 1px #000;
 
   @media screen and (min-width: 768px) {
     width: 738px;
-    font-size: 16px;
   }
   @media screen and (min-width: 1280px) {
     width: 1250px;
@@ -27,10 +28,7 @@ export const Wrapper = styled.div`
   justify-content: space-between;
 
   @media screen and (min-width: 768px) {
-    width: 300px;
-  }
-  @media screen and (min-width: 1280px) {
-    width: 500px;
+    width: 200px;
   }
 `;
 
@@ -42,8 +40,6 @@ export const WrapperRecord = styled.div`
   @media screen and (min-width: 768px) {
     display: block;
   }
-  @media screen and (min-width: 1280px) {
-  }
 `;
 export const WrapperItems = styled.div`
   display: flex;
@@ -53,14 +49,8 @@ export const WrapperItems = styled.div`
 
 export const Item = styled.span``;
 
-export const CoinImage = styled.img`
-  width: 20px;
-  @media screen and (min-width: 768px) {
-    width: 28px;
-  }
-  @media screen and (min-width: 1280px) {
-    width: 30px;
-  }
+export const Coins = styled.span`
+  margin-right: 7px;
 `;
 
 export const Time = styled.span`
@@ -68,6 +58,4 @@ export const Time = styled.span`
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-
-  font-size: 16px;
 `;

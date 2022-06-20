@@ -21,22 +21,28 @@ export const WrapperItems = styled.div`
 export const Title = styled.h1`
   margin-bottom: 15px;
   text-align: center;
+
+  font-size: 36px;
+
+  text-shadow: 1px 1px 1px #000;
 `;
 
 export const Scale = styled.div`
   position: relative;
   height: 24px;
+  padding: 20px;
   margin-top: 10px;
 
-  border-radius: 10px;
-  background-color: #fff;
+  border-radius: 30px;
+  border: 2px solid #fff;
   background-image: linear-gradient(
     90deg,
-    rgb(234, 72, 132) 0%,
-    rgb(234, 72, 132) 100%
+    rgba(234, 72, 132, 0.8) 0%,
+    rgba(234, 72, 132, 0.8) 100%
   );
   background-size: ${(props) => props.points};
   background-repeat: no-repeat;
+  box-shadow: 0px 2px 0px #000;
 `;
 
 export const MainScore = styled.span`
@@ -45,12 +51,13 @@ export const MainScore = styled.span`
   left: 50%;
   transform: translate(-50%, -50%);
 
-  font-size: 10px;
+  font-size: 16px;
 
-  color: #000;
+  color: #fff;
+  text-shadow: 1px 1px 1px #000;
 
   @media screen and (min-width: 768px) {
-    font-size: 12px;
+    font-size: 18px;
   }
 `;
 export const List = styled.ul`
@@ -63,36 +70,49 @@ export const Item = styled.li`
   align-items: center;
 
   &:not(:last-child) {
-    margin-bottom: 10px;
+    margin-bottom: 15px;
   }
 `;
 
 export const Name = styled.span`
-  font-size: 12px;
+  font-size: 22px;
+
+  text-shadow: 1px 1px 1px #000;
+
   @media screen and (min-width: 768px) {
-    font-size: 16px;
+    font-size: 28px;
   }
 `;
 export const Score = styled.span`
   margin-right: 30px;
+
+  font-size: 16px;
+
+  text-shadow: 1px 1px 1px #000;
+
   @media screen and (min-width: 768px) {
     margin-right: 120px;
+
+    font-size: 20px;
   }
 `;
 
 export const Button = styled.button`
-  padding: 5px 10px;
+  padding: 5px 20px;
   display: flex;
   align-items: center;
   justify-content: center;
 
-  font-family: "Press Start 2P", cursive;
+  font-family: inherit;
+  font-size: 22px;
 
-  border: 1px solid #eee;
+  border: 2px solid #fce656;
   border-radius: 20px;
   background-color: transparent;
   color: #fce656;
   cursor: pointer;
+  text-shadow: 1px 1px 1px #000;
+  box-shadow: 0px 2px 0px #000;
   transition: border-color 0.25s;
 
   &:hover {
@@ -100,28 +120,32 @@ export const Button = styled.button`
   }
 
   &:disabled {
-    border-color: #888;
-    color: #888;
+    border-color: #ddd;
+    color: #ddd;
     cursor: default;
   }
 `;
 
 export const LinkStyled = styled(Link)`
   position: absolute;
-  left: 20px;
+  left: 10px;
   top: -70px;
 
-  font-family: "Press Start 2P", cursive;
   font-size: 32px;
 
   border-radius: 20px;
   background: transparent;
   color: #fff;
   cursor: pointer;
+  text-shadow: 1px 1px 1px #000;
 
   transition: color 0.25s;
 
   &:hover {
     color: rgb(234, 72, 132);
+  }
+
+  @media screen and (min-width: 768px) {
+    left: -20px;
   }
 `;

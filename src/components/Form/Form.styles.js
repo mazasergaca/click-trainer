@@ -10,18 +10,28 @@ export const FormStyled = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media screen and (min-width: 768px) {
+    width: 450px;
+  }
 `;
 
 export const Label = styled.label`
+  width: 100%;
   margin-bottom: 30px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
+  justify-content: space-between;
 
-  font-size: 18px;
+  font-size: 26px;
+
+  text-shadow: 1px 1px 1px #000;
 
   @media screen and (min-width: 768px) {
     flex-direction: row;
+    align-items: center;
+
     font-size: 26px;
   }
 `;
@@ -29,33 +39,52 @@ export const Label = styled.label`
 export const Input = styled.input`
   width: 300px;
   margin-top: 10px;
-  padding: 4px 5px;
+  padding: 4px 10px;
 
-  font-family: "Press Start 2P", cursive;
+  font-family: inherit;
   font-size: 20px;
 
+  border-radius: 30px;
+  border: none;
+  outline: none;
+  box-shadow: 0px 2px 0px #000;
+
   @media screen and (min-width: 768px) {
+    margin-top: 0;
     margin-left: 10px;
+  }
+
+  &:focus {
+    outline: 2px solid rgb(234, 72, 132);
   }
 `;
 
 export const Title = styled.h1`
-  margin-bottom: 15px;
+  margin-bottom: 25px;
 
-  font-size: 20px;
+  font-size: 28px;
   text-align: center;
+
+  text-shadow: 1px 1px 1px #000;
+
+  @media screen and (min-width: 768px) {
+    font-size: 32px;
+  }
 `;
 
 export const Button = styled.button`
-  padding: 13px 35px;
+  padding: 10px 45px;
+  min-width: 175px;
 
-  font-family: "Press Start 2P", cursive;
-  font-size: 20px;
+  font-family: inherit;
+  font-size: 28px;
 
-  border-radius: 20px;
-  border: 1px solid #fff;
+  border-radius: 30px;
+  border: 2px solid #fff;
   background: transparent;
   color: #fff;
+  text-shadow: 1px 1px 1px #000;
+  box-shadow: 0px 2px 0px #000;
   cursor: pointer;
 
   transition: border-color 0.25s;
@@ -67,15 +96,15 @@ export const Button = styled.button`
 
 export const LinkStyled = styled(Link)`
   position: absolute;
-  left: 0;
+  left: -30px;
   top: -50px;
 
-  font-family: "Press Start 2P", cursive;
   font-size: 32px;
 
   border-radius: 20px;
   background: transparent;
   color: #fff;
+  text-shadow: 1px 1px 1px #000;
   cursor: pointer;
 
   transition: color 0.25s;
