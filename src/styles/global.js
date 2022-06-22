@@ -7,17 +7,19 @@ export const GLobalStyles = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
   }
-  /* html {
-    overflow-y: scroll;
-  } */
+
   body {
     font-size: 12px;
     line-height: 1.33;
     font-family: 'Secular One', sans-serif;
-   /* background: linear-gradient(90deg, #faf0cd, #fab397); */
    background-color: #000;
-   background-image: url(${backgroundImage});
+   background-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.2),
+      rgba(47, 48, 58, 0.4)
+    ), url(${backgroundImage});
     color: #fff;
+    text-shadow: 1px 1px 1px #000;
   
   }
   code {

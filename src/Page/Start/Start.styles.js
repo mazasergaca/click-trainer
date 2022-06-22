@@ -18,6 +18,42 @@ export const Wrapper = styled.div`
   align-items: center;
 `;
 
+export const Title = styled.h1`
+  position: relative;
+  margin-bottom: 50px;
+  display: flex;
+
+  font-size: 58px;
+
+  text-align: center;
+
+  @media screen and (min-width: 768px) {
+    font-size: 112px;
+  }
+
+  & span {
+    margin-right: 25px;
+
+    @media screen and (min-width: 768px) {
+      margin-right: 40px;
+    }
+  }
+`;
+
+export const Svg = styled.svg`
+  width: 56px;
+  height: 76px;
+  position: absolute;
+  left: 14%;
+
+  fill: rgb(216, 250, 67);
+
+  @media screen and (min-width: 768px) {
+    width: 100px;
+    height: 145px;
+  }
+`;
+
 export const LinkStyled = styled(Link)`
   padding: 10px 45px;
 
@@ -27,7 +63,6 @@ export const LinkStyled = styled(Link)`
   border: 2px solid #fff;
   background: transparent;
   color: #fff;
-  text-shadow: 1px 1px 1px #000;
   box-shadow: 0px 2px 0px #000;
   cursor: pointer;
 
@@ -49,7 +84,6 @@ export const Text = styled.span`
   text-align: center;
 
   color: #fff;
-  text-shadow: 1px 1px 1px #000;
 
   @media screen and (min-width: 768px) {
     font-size: 38px;

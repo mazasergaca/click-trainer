@@ -23,8 +23,6 @@ export const Title = styled.h1`
   text-align: center;
 
   font-size: 36px;
-
-  text-shadow: 1px 1px 1px #000;
 `;
 
 export const Scale = styled.div`
@@ -54,7 +52,6 @@ export const MainScore = styled.span`
   font-size: 16px;
 
   color: #fff;
-  text-shadow: 1px 1px 1px #000;
 
   @media screen and (min-width: 768px) {
     font-size: 18px;
@@ -77,8 +74,6 @@ export const Item = styled.li`
 export const Name = styled.span`
   font-size: 22px;
 
-  text-shadow: 1px 1px 1px #000;
-
   @media screen and (min-width: 768px) {
     font-size: 28px;
   }
@@ -87,8 +82,6 @@ export const Score = styled.span`
   margin-right: 30px;
 
   font-size: 16px;
-
-  text-shadow: 1px 1px 1px #000;
 
   @media screen and (min-width: 768px) {
     margin-right: 120px;
@@ -111,7 +104,7 @@ export const Button = styled.button`
   background-color: transparent;
   color: #fce656;
   cursor: pointer;
-  text-shadow: 1px 1px 1px #000;
+  text-shadow: inherit;
   box-shadow: 0px 2px 0px #000;
   transition: border-color 0.25s;
 

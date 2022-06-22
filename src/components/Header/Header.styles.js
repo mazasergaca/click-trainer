@@ -12,7 +12,6 @@ export const Container = styled.div`
   font-size: 22px;
 
   border-bottom: 1px solid #fff;
-  text-shadow: 1px 1px 1px #000;
 
   @media screen and (min-width: 768px) {
     width: 738px;

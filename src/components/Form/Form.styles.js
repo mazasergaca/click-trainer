@@ -26,8 +26,6 @@ export const Label = styled.label`
 
   font-size: 26px;
 
-  text-shadow: 1px 1px 1px #000;
-
   @media screen and (min-width: 768px) {
     flex-direction: row;
     align-items: center;
@@ -65,8 +63,6 @@ export const Title = styled.h1`
   font-size: 28px;
   text-align: center;
 
-  text-shadow: 1px 1px 1px #000;
-
   @media screen and (min-width: 768px) {
     font-size: 32px;
   }
@@ -83,7 +79,7 @@ export const Button = styled.button`
   border: 2px solid #fff;
   background: transparent;
   color: #fff;
-  text-shadow: 1px 1px 1px #000;
+  text-shadow: inherit;
   box-shadow: 0px 2px 0px #000;
   cursor: pointer;
 
@@ -104,7 +100,6 @@ export const LinkStyled = styled(Link)`
   border-radius: 20px;
   background: transparent;
   color: #fff;
-  text-shadow: 1px 1px 1px #000;
   cursor: pointer;
 
   transition: color 0.25s;

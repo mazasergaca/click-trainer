@@ -46,8 +46,6 @@ export const ItemMenu = styled.span`
   font-size: 36px;
   text-align: center;
 
-  text-shadow: 1px 1px 1px #000;
-
   &:not(:last-of-type) {
     margin-bottom: 10px;
   }
@@ -71,7 +69,7 @@ export const ButtonMenu = styled.button`
   border: 2px solid #fff;
   background: transparent;
   color: #fff;
-  text-shadow: 1px 1px 1px #000;
+  text-shadow: inherit;
   box-shadow: 0px 2px 0px #000;
   cursor: pointer;
 

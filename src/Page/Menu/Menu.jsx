@@ -7,7 +7,7 @@ import { logout } from "../../redux/user/user-slice";
 import userSelectors from "../../redux/user/user-selectors";
 import pressSound from "../../assets/sounds/start.mp3";
 import Container from "../../components/Container/Container";
-import { Wrapper, Button } from "./Menu.styles";
+import { Wrapper, Button, Title } from "./Menu.styles";
 
 const Menu = () => {
   const volume = useSelector(userSelectors.getVolume);
@@ -33,6 +33,7 @@ const Menu = () => {
       </Helmet>
       <Container>
         <Wrapper>
+          <Title>Menu</Title>
           <Button onClick={() => handleClick("/game")}>New game</Button>
           <Button onClick={() => handleClick("/market")}>Market</Button>
           <Button onClick={() => handleClick("/achievement")}>

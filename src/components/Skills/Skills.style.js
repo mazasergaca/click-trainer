@@ -32,8 +32,6 @@ export const Item = styled.div`
 export const Text = styled.span`
   margin-left: 10px;
   font-size: 20px;
-
-  text-shadow: 1px 1px 1px #000;
 `;
 
 export const Button = styled.button`

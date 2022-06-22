@@ -5,7 +5,15 @@ import useSound from "use-sound";
 import userSelectors from "../../redux/user/user-selectors";
 import pressSound from "../../assets/sounds/start.mp3";
 import Loader from "../../components/Loader/Loader";
-import { Backdrop, Wrapper, LinkStyled, Text } from "./Start.styles";
+import sprite from "../../assets/images/sprite.svg";
+import {
+  Backdrop,
+  Wrapper,
+  LinkStyled,
+  Text,
+  Title,
+  Svg,
+} from "./Start.styles";
 
 const StartPage = () => {
   const token = useSelector(userSelectors.getToken);
@@ -26,6 +34,13 @@ const StartPage = () => {
       <Backdrop>
         {!isFetchingCurrentUser ? (
           <Wrapper>
+            <Title>
+              <span>Cl</span>
+              ck storm
+              <Svg>
+                <use href={sprite + "#lightning"}></use>
+              </Svg>
+            </Title>
             {token ? (
               <>
                 <Text>Hello, {username}</Text>

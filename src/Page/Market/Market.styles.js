@@ -15,11 +15,10 @@ export const Wrapper = styled.div`
 
 export const Title = styled.h1`
   margin-bottom: 15px;
-  text-align: center;
 
   font-size: 36px;
 
-  text-shadow: 1px 1px 1px #000;
+  text-align: center;
 `;
 
 export const WrapperHeader = styled.div`
@@ -36,7 +35,6 @@ export const LinkStyled = styled(Link)`
   border-radius: 20px;
   background: transparent;
   color: #fff;
-  text-shadow: 1px 1px 1px #000;
   cursor: pointer;
 
   transition: color 0.25s;
@@ -60,7 +58,7 @@ export const ButtonStore = styled.button`
   border-radius: 20px;
   background-color: transparent;
   color: #fff;
-  text-shadow: 1px 1px 1px #000;
+  text-shadow: inherit;
   box-shadow: 0px 2px 0px #000;
   cursor: pointer;
   transition: border-color 0.25s;
@@ -96,8 +94,6 @@ export const WrapperName = styled.div`
 
   font-size: 20px;
 
-  text-shadow: 1px 1px 1px #000;
-
   @media screen and (min-width: 768px) {
     font-size: 24px;
   }
@@ -114,8 +110,6 @@ export const Price = styled.span`
 
   font-size: 20px;
 
-  text-shadow: 1px 1px 1px #000;
-
   @media screen and (min-width: 768px) {
     font-size: 22px;
   }
@@ -128,8 +122,6 @@ export const WrapperAmount = styled.div`
 
 export const Text = styled.span`
   font-size: 22px;
-
-  text-shadow: 1px 1px 1px #000;
 
   @media screen and (min-width: 768px) {
     font-size: 22px;

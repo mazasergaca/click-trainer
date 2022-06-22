@@ -10,6 +10,17 @@ export const Wrapper = styled.ul`
   flex-direction: column;
 `;
 
+export const Title = styled.h1`
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  font-size: 46px;
+
+  text-align: center;
+`;
+
 export const Button = styled.button`
   padding: 13px 75px;
 
@@ -21,7 +32,7 @@ export const Button = styled.button`
   border: 2px solid #fff;
   background: transparent;
   color: #fff;
-  text-shadow: 1px 1px 1px #000;
+  text-shadow: inherit;
   box-shadow: 0px 2px 0px #000;
   cursor: pointer;
 
